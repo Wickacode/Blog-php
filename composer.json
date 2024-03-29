@@ -1,0 +1,28 @@
+{
+    "name": "info/digitale",
+    "version": "0.1.0",
+    "description": "Projet 5 - Formation Développeur Symfony OpenClassrooms - Création d'un blog",
+    "keywords": [
+      "web",
+      "php",
+      "mvc",
+      "POO",
+      "application"
+    ],
+      "type": "project",
+      "license": "proprietary",
+  
+      "autoload": {
+          "psr-4": { "Models\\": "src/models", "Controllers\\": "src/controllers/"  },
+          "classmap": [ "src" ]
+  
+        },
+      "config": {
+          "platform": {
+              "php": "7.3.21"
+          }
+      },
+      "require":  {
+          "twig/twig": "^2.0"
+      }
+}
