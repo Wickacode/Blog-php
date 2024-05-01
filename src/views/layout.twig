@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/src/views/style.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Italiana&display=swap"
+      rel="stylesheet"
+    />
+    <title>Document</title>
+  </head>
+  <body>
+    <nav>
+      <div class="nav-container dfull">
+        <div class="logo-container">
+          <a href="#">
+            <img class="logo" src="jg-logo.png" alt="logo su site" />
+          </a>
+        </div>
+
+        <div class="navigation-links-container">
+          <ul class="light-text df">
+            <li><a href="{{ constant('local') }}">Accueil</a></li>
+            <li>
+              <a href="{{ constant('local') }}articles/listArticles"
+                >Portfolio</a
+              >
+            </li>
+            <li>Se connecter</li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    {% block content %}{% endblock %}
+
+    <footer>
+        <div class="footer-content df light-text">
+            <div class="logo">
+                <img class="logo" src="jg-logo.png" alt="">
+            </div>
+
+            <div class="links">
+                <a href="">Accueil</a>
+                <a href="">Portfolio</a>
+                <a href="">Se connecter</a>
+            </div>
+
+            <div class="social-media">
+
+            </div>
+        </div>
+    </footer>
+  </body>
+</html>

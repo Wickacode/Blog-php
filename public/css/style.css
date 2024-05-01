@@ -1,0 +1,145 @@
+/* styles.css */
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: "Italiana", sans-serif;
+    list-style-type: none;
+    text-decoration: none;
+    color: inherit;
+  }
+  /* Base */
+  .df {
+    display: flex;
+  }
+  
+  .wrap {
+    flex-wrap: wrap;
+  }
+  
+  .fdc {
+      flex-direction: column;
+  }
+  
+  .dfull {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .tac {
+    text-align: center;
+  }
+  
+  /* Colors */
+  .light-text {
+    color: white;
+  }
+  
+  /* Button Style */
+  
+  .btn {
+      padding: 10px;
+      border-radius: 4px;
+      border: none;
+      cursor: pointer;
+  }
+  
+  button.btn a {
+      font-family: Arial, Helvetica, sans-serif;
+  } 
+  
+  /* Barre de navigation */
+  .nav-container {
+    flex-direction: column;
+    background-color: #363434;
+    padding: 40px 0;
+    gap: 3em;
+  }
+  
+  .logo {
+    width: 200px;
+  }
+  
+  div.navigation-links-container ul {
+    gap: 2em;
+    font-size: 2em;
+    cursor: pointer;
+  }
+  
+  /* Section portfolio */
+  
+  section.portfolio {
+    padding: 40px 0;
+    gap: 2em;
+  }
+  
+  div.project-container {
+    background-color: rgb(202, 202, 202);
+    gap: 2em;
+    width: 500px;
+    padding: 20px 0;
+    border-radius: 5px;
+  }
+  
+  div.project-container img {
+    width: 500px;
+    height: 400px;
+    object-fit: cover;
+  }
+  
+  div.project-contain {
+      gap: 2em;
+      padding: 0 20px;
+  }
+  
+  div.project-contain p {
+      font-family: Arial, Helvetica, sans-serif;
+  }
+  
+  /* Single Page */
+  .left-container, .right-container {
+    width: 50%;
+    background-color: #363434;
+    padding-top: 40px;
+  
+  }
+  
+  div.left-container {
+  }
+  div.right-container img {
+    -webkit-animation: slide-in-right 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+    animation: slide-in-right 1.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;  width: 100%;
+  }
+  
+  @-webkit-keyframes slide-in-right {
+    0% {
+      -webkit-transform: translateX(1000px);
+              transform: translateX(1000px);
+      opacity: 0;
+    }
+    100% {
+      -webkit-transform: translateX(0);
+              transform: translateX(0);
+      opacity: 1;
+    }
+  }
+  @keyframes slide-in-right {
+    0% {
+      -webkit-transform: translateX(1000px);
+              transform: translateX(1000px);
+      opacity: 0;
+    }
+    100% {
+      -webkit-transform: translateX(0);
+              transform: translateX(0);
+      opacity: 1;
+    }
+  }
+  
+  /* Footer */
+  
+  .footer-content {
+      background-color: #363434;
+  }

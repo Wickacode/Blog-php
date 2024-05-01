@@ -1,7 +1,11 @@
-<?php 
-namespace Controllers;
-class HomeController{
-    public function index(){
-        echo "Bonjour";
+<?php
+
+namespace App\src\controllers;
+
+class Home extends AbstractController
+{
+    public function index()
+    {
+        $this->render('home');
     }
-}
+} 
