@@ -1,12 +1,15 @@
 <?php
-namespace App\src\controllers;
+namespace Controllers;
 
+use Models\Repository\ArticlesRepository;
 
-class Articles extends AbstractController
+class ArticlesController
 {
+    //Déclaration de la propriété privée 
+    private $twig;
     public function listArticles()
     {
-        //on appelle la méthode render() de la classe parente (AbstractController) en passant le nom de la vue à afficher
-        $this->render('listArticles');
+        $repository = new ArticlesRepository();
+        $repository->getArticles();
     }
-}
+} 

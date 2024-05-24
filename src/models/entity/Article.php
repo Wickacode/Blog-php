@@ -9,7 +9,7 @@ class Article
     private DateTime $date_publication;
     private DateTime $date_modification;
     private string $image;
-    private bool $delete;
+    private bool $delete_article;
 
         //L'hydratation 
     //Méthode magique 
@@ -53,7 +53,7 @@ class Article
     }
     public function delete(): bool
     {
-        return $this->delete;
+        return $this->delete_article;
     }
 
     //Setter
@@ -91,9 +91,9 @@ class Article
     {
         $this->image = $image;
     }
-    public function setDelete(bool $delete)
+    public function setDelete(bool $delete_article)
     {
-        $this->delete = $delete;
+        $this->delete_article = $delete_article;
     }
 
 }

@@ -1,10 +1,10 @@
 <?php
-class User {
+class Comment {
     private int $id_comment;
     private string $content;
     private DateTime $date_publication;
     private DateTime $date_modification;
-    private bool $delete;
+    private bool $delete_comment;
 
         //L'hydratation 
     //Méthode magique 
@@ -33,7 +33,7 @@ class User {
     }
 
     public function delete():bool {
-        return $this->delete;
+        return $this->delete_comment;
     }
 
     //Setter
@@ -54,7 +54,7 @@ class User {
         $this->date_modification= $date_modification ;
     }
 
-    public function setDelete(bool $delete) {
-        $this->delete= $delete;
+    public function setDelete(bool $delete_comment) {
+        $this->delete_comment= $delete_comment;
     }
 }
