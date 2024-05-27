@@ -11,7 +11,7 @@ class Article
     private string $image;
     private bool $delete_article;
 
-        //L'hydratation 
+    //L'hydratation 
     //Méthode magique 
     public function __construct(array $data) {
         foreach($data as $key=> $value ) {

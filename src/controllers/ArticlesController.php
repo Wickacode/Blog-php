@@ -3,13 +3,14 @@ namespace Controllers;
 
 use Models\Repository\ArticlesRepository;
 
-class ArticlesController
+class ArticlesController extends Controller
 {
     //Déclaration de la propriété privée 
-    private $twig;
     public function listArticles()
     {
         $repository = new ArticlesRepository();
-        $repository->getArticles();
+        $repository -> getArticles();
+        echo $this->twig->render('portfolio.html.twig');
+
     }
 } 
