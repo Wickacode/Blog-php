@@ -1,0 +1,25 @@
+{% extends 'base.html.twig' %} {% block body %}
+
+ <div class="body-width">
+    <h2 class="page-title">Formulaire d'inscription</h2>
+ </div>
+
+ <section class=" form-container body-width dfull">
+    <div class="w50">
+        <p class="form-text">En vous inscrivant, vous aurez la possibilié d'ajouter des commentaires sous mes posts</p>
+    </div>
+
+    <div class="contact-form w50">
+        <form action="/submit_contact" method="POST">
+            <label for="identifiant">Identifiant :</label>
+            <input type="text" id="identifiant" name="identifiant" required>
+
+            <label for="password">Mot de passe :</label>
+            <input id="password" name="password" required></input>
+
+            <button type="submit" class="btn dark bg-light-blue">S'inscrire</button>
+        </form>
+    </div>
+
+</section>
+{% endblock %}
