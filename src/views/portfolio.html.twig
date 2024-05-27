@@ -1,0 +1,47 @@
+{% extends 'base.html.twig' %} {% block body %}
+  <div class="body-width">
+    <h2 class="page-title">Projets</h2>
+  </div>
+    
+
+
+<section class="portfolio dfull wrap">
+  {# {% for article in articles %} 
+   <div>
+   <h2> {{article.title}} </h2>
+   <h3> LE TITRE TEST</h3>
+   </div>
+  {% endfor %} #}
+  <div class="project-container tac dfull gap fdc bg-dark light bxs">
+    <h2>Titre du projet</h2>
+    <img src="img/p01.png" alt="" />
+    <div class="project-contain dfull fdc">
+      <h3>Chapo du projet</h3>
+      <p class="nbText">
+        Sed viverra tellus in hac habitasse platea. Etiam erat velit scelerisque
+        in. Pharetra convallis posuere morbi leo. Augue lacus viverra vitae
+        congue eu. Urna porttitor rhoncus dolor purus non enim praesent
+        elementum. Nisl vel pretium lectus quam id. Sed arcu non odio euismod
+        lacinia at quis risus sed.
+      </p>
+      <button class="btn dark bg-light-blue">
+        <a href="index.php?action=single">Voir plus</a>
+      </button>
+    </div>
+  </div>
+</section>
+
+<script>
+  let paragraph = document.querySelectorAll(".nbText");
+  let maxLength = 210;
+
+  paragraph.forEach((paragraph) => {
+    if (paragraph.textContent.length > maxLength) {
+      const truncatedText =
+        paragraph.textContent.substring(0, maxLength) + "...";
+      paragraph.textContent = truncatedText;
+    }
+  });
+</script>
+
+{% endblock %}
