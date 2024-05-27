@@ -2,10 +2,10 @@
 
 namespace Controllers;
 
-class HomeController 
+class HomeController extends Controller
 {
     public function index()
     {
-
+        echo $this->twig->render('home.html.twig');
     }
 } 
