@@ -1,5 +1,6 @@
 <?php
-
+namespace Models\Entity;
+use DateTime;
 class Article
 {
     private int $id_article;
@@ -9,6 +10,7 @@ class Article
     private DateTime $date_publication;
     private DateTime $date_modification;
     private string $image;
+    private string $alt;
     private bool $delete_article;
 
     //L'hydratation 
@@ -23,35 +25,42 @@ class Article
     }
  
     //Getter
-    public function id_user(): int
+    public function getId_article(): int
     {
         return $this->id_article;
     }
-    public function title(): string
+    public function getTitle(): string
     {
         return $this->title;
     }
-    public function chapo(): string
+    public function getChapo(): string
     {
         return $this->chapo;
     }
-    public function content(): string
+    public function getContent(): string
     {
         return $this->content;
     }
-    public function datePublication(): DateTime
+    public function getDate_publication(): DateTime
     {
         return $this->date_publication;
     }
-    public function dateModification(): DateTime
+    public function getDate_modification(): DateTime
     {
         return $this->date_modification;
     }
-    public function image(): string
+    public function getImage(): string
     {
         return $this->image;
     }
-    public function delete(): bool
+
+    public function getAlt(): string
+    {
+        return $this->alt;
+    }
+
+    
+    public function getDelete(): bool
     {
         return $this->delete_article;
     }
@@ -78,18 +87,23 @@ class Article
         $this->content = $content;
     }
 
-    public function setDate_publication(DateTime $date_publication)
+    public function setDate_publication(string $date_publication)
     {
-        $this->date_publication = $date_publication;
+        $this->date_publication = DateTime::createFromFormat('Y-m-d', $date_publication);
     }
 
-    public function setDate_modification(DateTime $date_modification)
+    public function setDate_modification(string $date_modification)
     {
-        $this->date_modification = $date_modification;
+        $this->date_modification = DateTime::createFromFormat('Y-m-d', $date_modification);
     }
     public function setImage(string $image)
     {
         $this->image = $image;
+    }
+
+    public function setAlt(string $alt)
+    {
+        $this->alt = $alt;
     }
     public function setDelete(bool $delete_article)
     {
