@@ -1,0 +1,17 @@
+{% extends 'base.html.twig' %} {% block body %}
+
+    <section class="single-post df">
+        <div class="left-container light-text">
+            <h1> {{article.title}} </h1>
+                  <h2>{{article.chapo}}</h2>
+            <div>{{article.content}}</div>
+            <div>Commentaire</div>
+        </div>
+
+        <div class="right-container">
+            <img class="singleImg" src="{{article.image}}" alt="{{article.title}}" />
+        </div>
+    </section>
+
+{% endblock %}    
+  
