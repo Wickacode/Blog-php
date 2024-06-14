@@ -13,19 +13,23 @@ $action = $_GET["action"] ?? "index";
 
 switch ($action) {
     case "index":
-
         $controller = new HomeController();
         $controller->index();
         break;
 
     case "articles":
-        // include "./../src/views/front/portfolio.html";
         $controller = new ArticlesController();
         $controller->listArticles();
         break;
+    
+    case "article":
+        $controller = new ArticlesController();
+        $controller->Article();
+        break;
 
-    case "single":
-        include "./../src/views/front/single.html";
+    case "createArticle":
+        $controller = new ArticlesController();
+        $controller->createArticle();
         break;
 
     case "contact":
@@ -33,12 +37,12 @@ switch ($action) {
         $controller->contact();
         break;
 
-    case "inscription":
+    case "register":
         $controller = new AuthController();
         $controller->register();
         break;
 
-    case "connexion":
+    case "login":
         $controller = new AuthController();
         $controller->login();
         break;

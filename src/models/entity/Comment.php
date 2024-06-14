@@ -1,4 +1,6 @@
 <?php
+namespace Models\Entity;
+use DateTime;
 class Comment {
     private int $id_comment;
     private string $content;
