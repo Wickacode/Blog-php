@@ -21,26 +21,26 @@ class User {
         }
     }
  
-    public function id_user():int {
+    public function getId_user():int {
         return $this->id_user;
     }
-    public function firstname():string {
+    public function getFirstname():string {
         return $this->firstname;
     }
-    public function lastname():string {
+    public function getLastname():string {
         return $this->lastname;
     }
-    public function email():string {
+    public function getEmail():string {
         return $this->email;
     }
-    public function pseudo():string {
+    public function getPseudo():string {
         return $this->pseudo;
     }
-    public function password():string {
+    public function getPassword():string {
         return $this->password;
     }
 
-    public function role():bool {
+    public function getRole():bool {
         return $this->role;
     }
 
