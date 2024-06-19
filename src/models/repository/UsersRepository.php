@@ -12,7 +12,18 @@ class UsersRepository
     }
 
     public function addUser($user) {
+        $sql = 'INSERT INTO user (firstname, lastname, email, pseudo, password , role )
+        VALUES (:firstname, :lastname, :email, :pseudo, :password , 0)';
 
+        $query = $this->mysqlClient->prepare($sql);
+        $query->bindValue('firstname',$user->getFirstname(), PDO::PARAM_STR);
+        $query->bindValue('lastname',$user->getLastname(), PDO::PARAM_STR);
+        $query->bindValue('email',$user->getEmail(), PDO::PARAM_STR);
+        $query->bindValue('pseudo',$user->getPseudo(), PDO::PARAM_STR);
+        $query->bindValue('password',$user->getPassword(), PDO::PARAM_STR);
+        $query->execute();
+        
     }
 }
+
 ?>
