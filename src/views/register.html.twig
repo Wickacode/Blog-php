@@ -11,7 +11,13 @@
 
     <div class="contact-form w50">
         <form action="/submit_contact" method="POST">
-            <label for="identifiant">Identifiant :</label>
+            <label for="firstname">Prenom :</label>
+            <input type="text" id="firstname" name="firstname" required>
+
+            <label for="lastname">Nom :</label>
+            <input type="text" id="lastname" name="lastname" required>
+
+            <label for="identifiant">Pseudo :</label>
             <input type="text" id="identifiant" name="identifiant" required>
 
             <label for="email">Adresse mail :</label>
@@ -20,9 +26,18 @@
             <label for="password">Mot de passe :</label>
             <input id="password" name="password" required></input>
 
-            <button type="submit" class="btn dark bg-light-blue">S'inscrire</button>
+            <label for="confirmPass">Confirmer le mot de passe:</label>
+            <input id="confirmPass" name="confirmPass" required></input>
+
+            <button type="submit" class="btn dark bg-light-blue" name="submitRegister">S'inscrire</button>
         </form>
     </div>
+     {% if error is defined %}
+            <br /><p>{{ error }}</p>
+    {% endif %}
+    {% if validAdd is defined %}
+            <br /><p>{{ validAdd }}</p>
+    {% endif %}
 
 </section>
 {% endblock %}
