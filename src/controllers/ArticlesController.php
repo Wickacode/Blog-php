@@ -31,8 +31,7 @@ class ArticlesController extends Controller
             if (isset($_FILES["uploadfile"]["name"]) && !empty($_FILES["uploadfile"]["name"])) {
                 $filename = $_FILES["uploadfile"]["name"];
                 $folder = "C:/wamp64/www/Blog-php/public/img/upload/" . $filename;
-                if (move_uploaded_file($_FILES["uploadfile"]["tmp_name"], $folder))
-                    ;
+                if (move_uploaded_file($_FILES["uploadfile"]["tmp_name"], $folder));
             }
             if (!empty($_POST['title']) && !empty($_POST['chapo']) && !empty($_POST['content']) && !empty($_POST['altImage'])) {
                 $article = new Article([
@@ -46,12 +45,18 @@ class ArticlesController extends Controller
                 ]);
                 $repository = new ArticlesRepository();
                 $repository->addArticle($article);
+                $validAdd= "L'article a bien été ajouté";
             } else {
                 $error = "Tous les champs doivent être saisis";
                 echo $this->twig->render('createArticle.html.twig', ["error" => $error]);
             }
         }
-        echo $this->twig->render('createArticle.html.twig');
+        if(isset($validAdd)) {
+            echo $this->twig->render('createArticle.html.twig',["validAdd" => $validAdd]);
+        } else {
+            echo $this->twig->render('createArticle.html.twig');
+        }
+
     }
 
 }
