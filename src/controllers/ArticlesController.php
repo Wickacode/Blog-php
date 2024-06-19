@@ -32,6 +32,7 @@ class ArticlesController extends Controller
                 $filename = $_FILES["uploadfile"]["name"];
                 $folder = "C:/wamp64/www/Blog-php/public/img/upload/" . $filename;
                 if (move_uploaded_file($_FILES["uploadfile"]["tmp_name"], $folder));
+                $stockImg = "http://localhost/BLOG-PHP/public/img/upload/" . $filename;
             }
             if (!empty($_POST['title']) && !empty($_POST['chapo']) && !empty($_POST['content']) && !empty($_POST['altImage'])) {
                 $article = new Article([
@@ -40,7 +41,7 @@ class ArticlesController extends Controller
                     "content" => $_POST['content'],
                     "date_publication" => $date,
                     "date_modification" => $date,
-                    "image" => $filename,
+                    "image" => $stockImg,
                     "alt" => $_POST['altImage']
                 ]);
                 $repository = new ArticlesRepository();
