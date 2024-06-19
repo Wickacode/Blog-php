@@ -11,15 +11,22 @@ class ArticlesRepository
         $this->mysqlClient = new PDO('mysql:host=localhost;dbname=blog-php;charset=utf8', 'root', '', [PDO::ATTR_ERRMODE=>PDO::ERRMODE_EXCEPTION]);
     }
 
-    public function getArticles()
-    {
-        $request = $this->mysqlClient->query("SELECT * FROM article");
-        $result = ($request->fetchAll());
-        $tabArticles = [];
-        foreach($result as $article) {
-            $tabArticles[]= new Article($article);
-        } return $tabArticles;
+    public function getArticles(){
+        $sql = 'SELECT * FROM article';
+        $query = $this->mysqlClient->prepare($sql);
+        $query->execute();
+        $dataArticles = $query->fetchAll();
+        return $dataArticles;
     }
+
+    // public function getArticle($id){
+    //     $sql = 'SELECT * FROM article where id_article = :id_article';
+    //     $query = $this->mysqlClient->prepare($sql);
+    //     $query->bindValue(':id_article', $id, PDO::PARAM_INT);
+    //     $query->execute();
+    //     $dataArticle = $query->fetchAll();
+    //     return $dataArticle;
+    // }
 
     public function getArticle($id)
     {
