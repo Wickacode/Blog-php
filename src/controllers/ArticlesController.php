@@ -3,7 +3,6 @@ namespace Controllers;
 
 use Models\Entity\Article;
 use Models\Repository\ArticlesRepository;
-use DateTime;
 
 class ArticlesController extends Controller
 {
