@@ -10,14 +10,14 @@
     </div>
 
     <div class="contact-form w50">
-        <form action="/submit_contact" method="POST">
-            <label for="identifiant">Pseudo :</label>
-            <input type="text" id="identifiant" name="identifiant" required>
+        <form action="index.php?action=login" method="POST">
+            <label for="email">Email :</label>
+            <input type="email" id="email" name="email" required>
 
             <label for="password">Mot de passe :</label>
-            <input id="password" name="password" required></input>
+            <input type="password" id="password" name="password" required>
 
-            <button type="submit" class="btn dark bg-light-blue">S'inscrire</button>
+            <button name="submitLogin" type="submit" class="btn dark bg-light-blue">Se connecter</button>
         </form>
     </div>
 
