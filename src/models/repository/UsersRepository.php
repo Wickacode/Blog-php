@@ -24,6 +24,14 @@ class UsersRepository
         $query->execute();
         
     }
+
+    public function getUserByEmail($email){
+        $query = $this->mysqlClient->prepare("SELECT * FROM user WHERE email = :email");
+        $query->bindValue('email', $email, PDO::PARAM_STR);
+        $query->execute();
+        $data = $query->fetch();
+        return new User($data);
+    }
 }
 
 ?>
