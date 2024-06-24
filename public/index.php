@@ -6,9 +6,8 @@ use Controllers\HomeController;
 use Controllers\AuthController;
 
 //Activation de la super globale
-if(!isset($_SESSION)) {
-    session_start();
-}
+session_start();
+
 
 //Définition d'une constante contenant le dossier racine du projet
 define('ROOT', dirname(__DIR__));
