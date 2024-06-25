@@ -61,7 +61,6 @@ class AuthController extends Controller
                 } else {
                     $error = "Le mot de passe est incorrect";
                     echo $this->twig->render('login.html.twig', ["error" => $error]);
-
                 }
             }
         }

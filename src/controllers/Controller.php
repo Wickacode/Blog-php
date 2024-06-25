@@ -17,19 +17,19 @@ class Controller {
         $this->twig = new Environment($this->loader);
     }
 
-    public function createSession(array $sessionDatas) {
-        $this->session["user"] = [
-            'sessionId' => session_id(),
-            'idUser' => $sessionDatas['id_user'],
-            'firstname' => $sessionDatas['firstname'],
-            'lastname' => $sessionDatas['lastname'],
-            'email' => $sessionDatas['login_user'],
-            'pseudo' => $sessionDatas['email_user'],
-            'password' => $sessionDatas['dateCreate_user'],
-            'role' => $sessionDatas['role_user']
-        ];
-        $this->user = $this->session['user'];
-        $_SESSION['user'] = $this->session['user'];
-        return $_SESSION['user'];
-    }
+    // public function createSession(array $sessionDatas) {
+    //     $this->session["user"] = [
+    //         'sessionId' => session_id(),
+    //         'idUser' => $sessionDatas['id_user'],
+    //         'firstname' => $sessionDatas['firstname'],
+    //         'lastname' => $sessionDatas['lastname'],
+    //         'email' => $sessionDatas['login_user'],
+    //         'pseudo' => $sessionDatas['email_user'],
+    //         'password' => $sessionDatas['dateCreate_user'],
+    //         'role' => $sessionDatas['role_user']
+    //     ];
+    //     $this->user = $this->session['user'];
+    //     $_SESSION['user'] = $this->session['user'];
+    //     return $_SESSION['user'];
+    // }
 }

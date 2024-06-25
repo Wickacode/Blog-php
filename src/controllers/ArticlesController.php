@@ -3,6 +3,9 @@ namespace Controllers;
 
 use Models\Entity\Article;
 use Models\Repository\ArticlesRepository;
+use Models\Entity\Comment;
+use Models\Repository\CommentsRepository;
+
 
 class ArticlesController extends Controller
 {
@@ -30,7 +33,8 @@ class ArticlesController extends Controller
             if (isset($_FILES["uploadfile"]["name"]) && !empty($_FILES["uploadfile"]["name"])) {
                 $filename = $_FILES["uploadfile"]["name"];
                 $folder = "C:/wamp64/www/Blog-php/public/img/upload/" . $filename;
-                if (move_uploaded_file($_FILES["uploadfile"]["tmp_name"], $folder));
+                if (move_uploaded_file($_FILES["uploadfile"]["tmp_name"], $folder))
+                    ;
                 $stockImg = "http://localhost/BLOG-PHP/public/img/upload/" . $filename;
             }
             if (!empty($_POST['title']) && !empty($_POST['chapo']) && !empty($_POST['content']) && !empty($_POST['altImage'])) {
@@ -45,18 +49,43 @@ class ArticlesController extends Controller
                 ]);
                 $repository = new ArticlesRepository();
                 $repository->addArticle($article);
-                $validAdd= "L'article a bien été ajouté";
+                $validAdd = "L'article a bien été ajouté";
             } else {
                 $error = "Tous les champs doivent être saisis";
                 echo $this->twig->render('createArticle.html.twig', ["error" => $error]);
             }
         }
-        if(isset($validAdd)) {
-            echo $this->twig->render('createArticle.html.twig',["validAdd" => $validAdd]);
+        if (isset($validAdd)) {
+            echo $this->twig->render('createArticle.html.twig', ["validAdd" => $validAdd]);
         } else {
             echo $this->twig->render('createArticle.html.twig');
         }
 
+    }
+
+    public function createComment()
+    {
+        if (isset($_POST['submitComment'])) {
+            $date = date('Y-m-d');
+            if (!empty($_POST['message'])) {
+                $comment = new Comment([
+                    "content" => $_POST['message'],
+                    "date_publication" => $date,
+                    "date_modification" => $date,
+                    "id_user " => $_SESSION['userId'],
+                    "id_article" => $_GET["id_article"]
+                ]);
+                $repositoryComment = new CommentsRepository();
+                $repositoryComment->addComment($comment);
+                $validAddComment = "Le commentaire est en cours de validation";
+                // return header('http://localhost/BLOG-PHP/public/index.php?action=article&id_article=' . $_GET["id_article"]);
+                echo $this->twig->render('article.html.twig');
+
+            } else {
+                $error = "Tous les champs doivent être saisis";
+                echo $this->twig->render('createArticle.html.twig', ["error" => $error]);
+            }
+        }
     }
 
 }

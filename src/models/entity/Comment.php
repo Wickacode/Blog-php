@@ -8,7 +8,10 @@ class Comment {
     private DateTime $date_modification;
     private bool $delete_comment;
 
-        //L'hydratation 
+    private int $id_article;
+    private int $id_user;
+
+    //L'hydratation 
     //Méthode magique 
     public function __construct(array $data) {
         foreach($data as $key=> $value ) {
@@ -21,21 +24,29 @@ class Comment {
  
 
     //Getter
-    public function id_comment():int {
+    public function getId_comment():int {
         return $this->id_comment;
     }
-    public function content():string {
+    public function getContent():string {
         return $this->content;
     }
-    public function date_publication():DateTime {
+    public function getDate_publication():DateTime {
         return $this->date_publication;
     }
-    public function date_modification():DateTime {
+    public function getDate_modification():DateTime {
         return $this->date_modification;
     }
 
-    public function delete():bool {
+    public function getDelete():bool {
         return $this->delete_comment;
+    }
+
+    public function getIdUser():int {
+        return $this->id_user;
+    }
+
+    public function getIdArticle():int {
+        return $this->id_comment;
     }
 
     //Setter
@@ -58,5 +69,13 @@ class Comment {
 
     public function setDelete(bool $delete_comment) {
         $this->delete_comment= $delete_comment;
+    }
+
+    public function setIdUser(int $id_user) {
+        $this->id_user= $id_user;
+    }
+
+    public function setIdArticle(int $id_article) {
+        $this->id_article = $id_article;
     }
 }
