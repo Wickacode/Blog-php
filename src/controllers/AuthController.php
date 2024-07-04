@@ -56,8 +56,8 @@ class AuthController extends Controller
                 if (password_verify($_POST['password'], $user->getPassword())) {
                     $_SESSION['auth'] = true;
                     $_SESSION['userId'] = $user->getId_user();
-                    $_SESSION['role'] = $user->getRole();
-                    echo $this->twig->render('home.html.twig');
+                    $_SESSION['role'] = $user->getRole();   
+                    return header("location:index.php");               
                 } else {
                     $error = "Le mot de passe est incorrect";
                     echo $this->twig->render('login.html.twig', ["error" => $error]);
