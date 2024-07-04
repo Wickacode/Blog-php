@@ -35,6 +35,11 @@ switch ($action) {
         $controller->createArticle();
         break;
 
+    case "createComment":
+        $controller = new ArticlesController();
+        $controller -> createComment();
+        break;
+
     case "contact":
         $controller = new ContactController();
         $controller->contact();

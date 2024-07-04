@@ -41,12 +41,12 @@ class Comment {
         return $this->delete_comment;
     }
 
-    public function getIdUser():int {
+    public function getId_user():int {
         return $this->id_user;
     }
 
-    public function getIdArticle():int {
-        return $this->id_comment;
+    public function getId_article():int {
+        return $this->id_article;
     }
 
     //Setter
@@ -71,11 +71,11 @@ class Comment {
         $this->delete_comment= $delete_comment;
     }
 
-    public function setIdUser(int $id_user) {
+    public function setId_user(int $id_user) {
         $this->id_user= $id_user;
     }
 
-    public function setIdArticle(int $id_article) {
+    public function setId_article(int $id_article) {
         $this->id_article = $id_article;
     }
 }
