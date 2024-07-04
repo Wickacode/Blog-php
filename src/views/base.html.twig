@@ -14,9 +14,52 @@
     <title>{% block title %}Titre test{% endblock%}</title>
   </head>
   <body>
-  {{include('navbar.html')}}
+  <nav>
+  <div class="nav-container dfull jcsb">
+    <div class="logo-container">
+      <a href="#">
+        <img class="logo" src="img/jg-logo.png" alt="logo su site" />
+      </a>
+    </div>
+
+    <div class="navigation-links-container">
+      <ul class="light df">
+        <li><a href="index.php">Accueil</a></li>
+        <li><a href="index.php?action=articles">Projets</a></li>
+        <li><a href="index.php?action=contact">Contact</a></li>
+        <li><a href="index.php?action=approveComments">Commentaires</a></li>
+      </ul>
+    </div>
+ 
+    {% if session is defined  %} 
+
+      <li>
+        <span>Bonjour {{ pseudo }}</span> 
+        <ul>
+            <li><a href="index.php?action=userManagement">Gérer votre compte</a></li>
+                                    
+              {% if role == 1  %}
+                  <li class="li-item"><a href="index.php?action=administration">Administration</a></li>
+              {% endif %} 
+
+            <li class="li-item"><a href="index.php?action=logout">Déconnexion</a></li>
+        </ul>
+      </li>
+
+      {% else %}
+      <div class="light">
+        <a href="index.php?action=login">Se connecter</a>
+        <a href="index.php?action=register">S'incrire</a>
+      </div>
+      {% endif %}
+
+  </div>
+</nav>
   {% block body %}
+
   {% endblock %}
-  {{include('footer.html')}}
+<footer class="footer-content h250 bg-light-blue">
+    <p class="body-width dfull pd20">&Copy; Jessica GARRIDO - 2024 - Tous droits réservés</p>
+</footer>
   </body>
   </html>
