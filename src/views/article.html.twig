@@ -2,16 +2,36 @@
 
     <section class="single-post df">
         <div class="left-container light-text">
-            <h1> {{article.title}} </h1>
+        <div>
+        <h1> {{article.title}} </h1>
                   <h2>{{article.chapo}}</h2>
-            <div>{{article.content}}</div>
-            <div>Commentaire</div>
+            <p>{{article.content}}</p>
+        </div>
+            
+        <div>
+        <h3>Commentaires</h3>
             <form action="index.php?action=createComment&id_article={{article.id_article}}" method="POST">
             <label for="message">Message :</label>
             <textarea type="text" id="message" name="message" required></textarea>
 
             <button name="submitComment" type="submit" class="btn dark bg-light-blue">Ajouter commentaire</button>
+
+             {% for comment in comments %}
+                <div>
+                    <div>
+                        <p class="text-justify">{{ comment.content }}</p>
+                    </div>
+                    <div>
+                        <p>
+                            par <b>{{ comment.autor_com }}</b>
+                        </p>
+                    </div> 
+                           
+                </div>
+            {% endfor %}
         </form>
+        </div>
+            
         </div>
 
         <div class="right-container">
