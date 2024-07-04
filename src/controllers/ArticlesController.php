@@ -66,14 +66,11 @@ class ArticlesController extends Controller
     public function createComment()
     {
         if (isset($_POST['submitComment'])) {
-            $date = date('Y-m-d');
             if (!empty($_POST['message'])) {
                 $comment = new Comment([
                     "content" => $_POST['message'],
-                    "date_publication" => $date,
-                    "date_modification" => $date,
-                    "id_user " => $_SESSION['userId'],
-                    "id_article" => $_GET["id_article"]
+                    "id_user"=> (int)$_SESSION['userId'],
+                    "id_article" => (int)$_GET["id_article"]
                 ]);
                 $repositoryComment = new CommentsRepository();
                 $repositoryComment->addComment($comment);
