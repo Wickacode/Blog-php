@@ -1,11 +1,8 @@
 <?php
 namespace Models\Entity;
-use DateTime;
 class Comment {
     private int $id_comment;
     private string $content;
-    private DateTime $date_publication;
-    private DateTime $date_modification;
     private bool $delete_comment;
 
     private int $id_article;
@@ -30,12 +27,6 @@ class Comment {
     public function getContent():string {
         return $this->content;
     }
-    public function getDate_publication():DateTime {
-        return $this->date_publication;
-    }
-    public function getDate_modification():DateTime {
-        return $this->date_modification;
-    }
 
     public function getDelete():bool {
         return $this->delete_comment;
@@ -57,14 +48,6 @@ class Comment {
 
     public function setContent(string $content) {
         $this->content= $content;
-    }
-
-    public function setDate_publication(DateTime $date_publication) {
-        $this->date_publication= $date_publication;
-    }
-
-    public function setDate_modification(DateTime $date_modification ) {
-        $this->date_modification= $date_modification ;
     }
 
     public function setDelete(bool $delete_comment) {

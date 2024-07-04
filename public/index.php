@@ -40,6 +40,10 @@ switch ($action) {
         $controller -> createComment();
         break;
 
+    case "approveComments":
+        $controller = new ArticlesController();
+        $controller -> approveComments();
+
     case "contact":
         $controller = new ContactController();
         $controller->contact();
@@ -53,6 +57,21 @@ switch ($action) {
     case "login":
         $controller = new AuthController();
         $controller->login();
+        break;
+
+    case "logout":
+        $controller = new AuthController();
+        $controller->logout();
+        break;
+
+    case "administration":
+        $controller = new AdminController();
+        $controller->administration();
+        break;
+    
+    case "userManagement":
+        $controller = new UsersController();
+        $controller->userManagement();
         break;
 
 }
