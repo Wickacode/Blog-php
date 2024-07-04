@@ -20,9 +20,12 @@ class ArticlesController extends Controller
     public function Article()
     {
         $id = $_GET["id_article"];
-        $repository = new ArticlesRepository();
-        $article = $repository->getArticle($id);
-        echo $this->twig->render('article.html.twig', ["article" => $article]);
+        $repositoryArticles = new ArticlesRepository();
+        $article = $repositoryArticles->getArticle($id);
+        $repositoryComments = new CommentsRepository();
+        $comments = $repositoryComments->getComments($id);
+        var_dump($comments);
+        echo $this->twig->render('article.html.twig', ["article" => $article, "comments" => $comments]);
     }
 
     public function createArticle()
@@ -75,14 +78,20 @@ class ArticlesController extends Controller
                 $repositoryComment = new CommentsRepository();
                 $repositoryComment->addComment($comment);
                 $validAddComment = "Le commentaire est en cours de validation";
-                // return header('http://localhost/BLOG-PHP/public/index.php?action=article&id_article=' . $_GET["id_article"]);
-                echo $this->twig->render('article.html.twig');
+                return header('location: http://localhost/BLOG-PHP/public/index.php?action=article&id_article=' . $_GET["id_article"]);
 
             } else {
                 $error = "Tous les champs doivent être saisis";
                 echo $this->twig->render('createArticle.html.twig', ["error" => $error]);
             }
         }
+    }
+
+    public function approveComments()
+    {
+        $repository = new CommentsRepository();
+        $comments = $repository->approveComments();
+        echo $this->twig->render('approveComments.html.twig', ["comments" => $comments]);
     }
 
 }
