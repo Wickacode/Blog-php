@@ -57,7 +57,13 @@ class AuthController extends Controller
                     $_SESSION['auth'] = true;
                     $_SESSION['userId'] = $user->getId_user();
                     $_SESSION['role'] = $user->getRole();   
-                    return header("location:index.php");               
+                    $_SESSION['pseudo'] = $user->getPseudo();   
+                    echo $this->twig->render('home.html.twig', 
+                        [
+                            "session" => $_SESSION['auth'], 
+                            "role" => $_SESSION['role'], 
+                            "pseudo" => $_SESSION['pseudo']
+                        ]);              
                 } else {
                     $error = "Le mot de passe est incorrect";
                     echo $this->twig->render('login.html.twig', ["error" => $error]);
@@ -66,4 +72,13 @@ class AuthController extends Controller
         }
         echo $this->twig->render('login.html.twig');
     }
+
+    public function logout()
+    {  
+        unset($_SESSION["auth"]);
+        unset($_SESSION["userId"]);
+        unset($_SESSION["role"]);
+        echo $this->twig->render('home.html.twig');
+    }
+
 }
