@@ -24,13 +24,25 @@ class CommentsRepository
     }
 
     public function getComments($id) {
-        $sql = "SELECT * FROM comment AS c,user AS u  WHERE c.id_user = u.id_user AND id_article = $id";
+        $sql = "SELECT * FROM comment AS c,user AS u  WHERE c.id_user = u.id_user AND id_article = $id AND statut = 1";
         $query = $this->mysqlClient->prepare($sql);
         $query->execute();
         $dataComments = $query->fetchAll();
         return $dataComments;
     }
-    public function approveComment() {
+
+    public function listComments() {
+        $sql = "SELECT * FROM comment WHERE statut IS NULL ";
+        $query = $this->mysqlClient->prepare($sql);
+        $query->execute();
+        $dataComments = $query->fetchAll();
+        $comments = [];
+        foreach($dataComments as $comment) {
+            $comments[] = new Comment($comment);
+        } 
+        return $comments;
+    }
+    public function approveComments() {
 
     }
 }
