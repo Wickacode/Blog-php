@@ -1,0 +1,32 @@
+{% extends 'base.html.twig' %} {% block body %}
+
+    <section>
+        <div>
+            {% for comment in comments %}
+                <div>
+                    <div>
+                        <p>{{ comment.content }}</p>
+                    </div>
+                    <div>
+                        <p>
+                            par <b>{{ comment.pseudo }}</b>
+                        </p>
+                    </div> 
+                    <div>
+                        <p>
+                            Pour l'article : <b>"{{ comment.title }}"</b>
+                        </p>
+                    </div> 
+                           
+                </div>
+                <div>
+            <a href="index.php?action=approveCom" id="approveCom">Approuver</a>
+            <a href="index.php?action=deleteCom" id="deleteCom">Supprimer</a>
+        </div>
+            {% endfor %}
+        </div>
+
+        
+    </section>
+
+{% endblock %}    

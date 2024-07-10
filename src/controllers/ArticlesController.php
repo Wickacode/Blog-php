@@ -16,7 +16,7 @@ class ArticlesController extends Controller
         $articles = $repository->getArticles();
         echo $this->twig->render('portfolio.html.twig', ["articles" => $articles]);
     }
-
+ 
     public function Article()
     {
         $id = $_GET["id_article"];
@@ -24,7 +24,6 @@ class ArticlesController extends Controller
         $article = $repositoryArticles->getArticle($id);
         $repositoryComments = new CommentsRepository();
         $comments = $repositoryComments->getComments($id);
-        var_dump($comments);
         echo $this->twig->render('article.html.twig', ["article" => $article, "comments" => $comments]);
     }
 
@@ -36,8 +35,7 @@ class ArticlesController extends Controller
             if (isset($_FILES["uploadfile"]["name"]) && !empty($_FILES["uploadfile"]["name"])) {
                 $filename = $_FILES["uploadfile"]["name"];
                 $folder = "C:/wamp64/www/Blog-php/public/img/upload/" . $filename;
-                if (move_uploaded_file($_FILES["uploadfile"]["tmp_name"], $folder))
-                    ;
+                if (move_uploaded_file($_FILES["uploadfile"]["tmp_name"], $folder));
                 $stockImg = "http://localhost/BLOG-PHP/public/img/upload/" . $filename;
             }
             if (!empty($_POST['title']) && !empty($_POST['chapo']) && !empty($_POST['content']) && !empty($_POST['altImage'])) {
@@ -86,12 +84,28 @@ class ArticlesController extends Controller
             }
         }
     }
-
-    public function approveComments()
+    public function listComments()
     {
-        $repository = new CommentsRepository();
-        $comments = $repository->approveComments();
-        echo $this->twig->render('approveComments.html.twig', ["comments" => $comments]);
+        $commentsRepository = new CommentsRepository();
+        $comments = $commentsRepository->listComments();
+        
+        echo $this->twig->render('listComments.html.twig', ["comments" => $comments]);
+    }
+
+    public function approveCom()
+    {
+        $commentsRepository = new CommentsRepository();
+        $comments = $commentsRepository->validCom();
+        
+        echo $this->twig->render('listComments.html.twig', ["comments" => $comments]);
+    }
+
+    public function deleteCom()
+    {
+        $commentsRepository = new CommentsRepository();
+        $comments = $commentsRepository->refuseCom();
+        
+        echo $this->twig->render('listComments.html.twig', ["comments" => $comments]);
     }
 
 }

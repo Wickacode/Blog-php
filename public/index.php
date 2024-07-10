@@ -4,6 +4,8 @@ use Controllers\ArticlesController;
 use Controllers\ContactController;
 use Controllers\HomeController;
 use Controllers\AuthController;
+use Controllers\AdminController;
+use Controllers\UsersController;
 
 //Activation de la super globale
 session_start();
@@ -24,7 +26,7 @@ switch ($action) {
         $controller = new ArticlesController();
         $controller->listArticles();
         break;
-    
+
     case "article":
         $controller = new ArticlesController();
         $controller->Article();
@@ -37,12 +39,23 @@ switch ($action) {
 
     case "createComment":
         $controller = new ArticlesController();
-        $controller -> createComment();
+        $controller->createComment();
         break;
 
-    case "approveComments":
+    case "listComments":
         $controller = new ArticlesController();
-        $controller -> approveComments();
+        $controller->listComments();
+        break;
+
+    case "approveCom":
+        $controller = new ArticlesController();
+        $controller->approveCom();
+        break;
+
+    case "deletCom":
+        $controller = new ArticlesController();
+        $controller->deleteCom();
+        break;
 
     case "contact":
         $controller = new ContactController();
@@ -68,7 +81,7 @@ switch ($action) {
         $controller = new AdminController();
         $controller->administration();
         break;
-    
+
     case "userManagement":
         $controller = new UsersController();
         $controller->userManagement();
