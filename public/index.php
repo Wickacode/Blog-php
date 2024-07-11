@@ -52,7 +52,7 @@ switch ($action) {
         $controller->approveCom();
         break;
 
-    case "deletCom":
+    case "deleteCom":
         $controller = new ArticlesController();
         $controller->deleteCom();
         break;

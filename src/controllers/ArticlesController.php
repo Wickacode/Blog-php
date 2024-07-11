@@ -94,18 +94,19 @@ class ArticlesController extends Controller
 
     public function approveCom()
     {
+        $idCom = $_GET["id_comment"];
         $commentsRepository = new CommentsRepository();
-        $comments = $commentsRepository->validCom();
-        
-        echo $this->twig->render('listComments.html.twig', ["comments" => $comments]);
+        $commentsRepository->validCom($idCom);
+        return header('location: http://localhost/BLOG-PHP/public/index.php?action=listComments');
     }
 
     public function deleteCom()
     {
+        $idCom = $_GET["id_comment"];
         $commentsRepository = new CommentsRepository();
-        $comments = $commentsRepository->refuseCom();
-        
-        echo $this->twig->render('listComments.html.twig', ["comments" => $comments]);
+        $commentsRepository->refuseCom($idCom);
+        return header('location: http://localhost/BLOG-PHP/public/index.php?action=listComments');
+
     }
 
 }

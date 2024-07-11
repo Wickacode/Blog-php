@@ -32,17 +32,25 @@ class CommentsRepository
     }
 
     public function listComments() {
-        $sql = "SELECT * FROM comment WHERE statut IS NULL ";
+        $sql = "SELECT c.content, u.pseudo, a.title, c.id_comment FROM comment AS c,user AS u, article AS a WHERE a.id_article = c.id_article AND c.id_user = u.id_user AND statut IS NULL ";
         $query = $this->mysqlClient->prepare($sql);
         $query->execute();
         $dataComments = $query->fetchAll();
-        $comments = [];
-        foreach($dataComments as $comment) {
-            $comments[] = new Comment($comment);
-        } 
-        return $comments;
+        return $dataComments;
     }
-    public function approveComments() {
+    public function validCom($idCom) {
+        $sql = 'UPDATE comment SET statut = 1 WHERE id_comment = :id_comment';
+        $query = $this->mysqlClient->prepare($sql);
+        $query->bindValue(':id_comment', $idCom, PDO::PARAM_INT);
+        $data = $query->execute(); 
+        return $data;
+    }
 
+    public function refuseCom($idCom) {
+        $sql = 'UPDATE comment SET statut = 0 WHERE id_comment = :id_comment';
+        $query = $this->mysqlClient->prepare($sql);
+        $query->bindValue(':id_comment', $idCom, PDO::PARAM_INT);
+        $data = $query->execute();
+        return $data;
     }
 }
