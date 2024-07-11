@@ -5,6 +5,6 @@ class AdminController extends Controller
 {
     public function administration()
     {
-        echo $this->twig->render('administration.html.twig');
+        echo $this->render('administration.html.twig');
     }
 } 

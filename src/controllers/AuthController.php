@@ -23,7 +23,7 @@ class AuthController extends Controller
 
             } else {
                 $error = "Tous les champs doivent être saisis";
-                echo $this->twig->render('register.html.twig', ["error" => $error]);
+                echo $this->render('register.html.twig', ["error" => $error]);
             }
             $passwordLength = strlen($_POST['password']);
             if ($passwordLength >= 8) {
@@ -33,52 +33,47 @@ class AuthController extends Controller
                     $validAdd = "Votre compte a bien été crée, vous pouvez maintenant vous connecter";
                 } else {
                     $error = "Les mots de passe doivent être identiques.";
-                    echo $this->twig->render('register.html.twig', ["error" => $error]);
+                    echo $this->render('register.html.twig', ["error" => $error]);
                 }
             } else {
                 $error = "Le mot de passe doit contenir minimum 8 caractères.";
-                echo $this->twig->render('register.html.twig', ["error" => $error]);
+                echo $this->render('register.html.twig', ["error" => $error]);
             }
         }
         if (isset($validAdd)) {
-            echo $this->twig->render('login.html.twig', ["validAdd" => $validAdd]);
+            echo $this->render('login.html.twig', ["validAdd" => $validAdd]);
         } else {
-            echo $this->twig->render('register.html.twig');
+            echo $this->render('register.html.twig');
         }
     }
-    public function login()
+    public function loginUser()
     {
         if (isset($_POST['submitLogin'])) {
+            // $user = New User();
             if (!empty($_POST['email']) && !empty($_POST['password'])) {
                 $repository = new UsersRepository();
                 $user = $repository->getUserByEmail($_POST['email']);
+                $dataUser = $repository->readUser($user);
 
                 if (password_verify($_POST['password'], $user->getPassword())) {
-                    $_SESSION['auth'] = true;
-                    $_SESSION['userId'] = $user->getId_user();
-                    $_SESSION['role'] = $user->getRole();   
-                    $_SESSION['pseudo'] = $user->getPseudo();   
-                    echo $this->twig->render('home.html.twig', 
-                        [
-                            "session" => $_SESSION['auth'], 
-                            "role" => $_SESSION['role'], 
-                            "pseudo" => $_SESSION['pseudo']
-                        ]);              
+                    $this->createSession($dataUser);
+                    echo $this->render('home.html.twig');                         
                 } else {
                     $error = "Le mot de passe est incorrect";
-                    echo $this->twig->render('login.html.twig', ["error" => $error]);
+                    echo $this->render('login.html.twig', ["error" => $error]);
                 }
             }
         }
-        echo $this->twig->render('login.html.twig');
+    }
+
+    public function login() {
+        echo $this->render('login.html.twig');
     }
 
     public function logout()
     {  
-        unset($_SESSION["auth"]);
-        unset($_SESSION["userId"]);
-        unset($_SESSION["role"]);
-        echo $this->twig->render('home.html.twig');
+        unset($_SESSION["user"]);
+        echo $this->render('home.html.twig');
     }
 
 }

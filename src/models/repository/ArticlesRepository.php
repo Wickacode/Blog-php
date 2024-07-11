@@ -16,7 +16,11 @@ class ArticlesRepository
         $query = $this->mysqlClient->prepare($sql);
         $query->execute();
         $dataArticles = $query->fetchAll();
-        return $dataArticles;
+        $articles = [];
+        foreach($dataArticles as $article) {
+            $articles[] = new Article($article);
+        } 
+        return $articles;
     }
 
     // public function getArticle($id){
@@ -52,4 +56,5 @@ class ArticlesRepository
             $query->execute();
             
         }
+        
 } 

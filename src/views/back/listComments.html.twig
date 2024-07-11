@@ -1,0 +1,30 @@
+{% extends 'base.html.twig' %} {% block body %}
+
+    <section class="CommentsContainer">
+    <h1 class="page-title">Liste des commentaires</h1>
+        <div class="listComments dfull fdc">
+            {% for comment in comments %}
+                <div class="gestionComment dfull gap bxs">
+                    <div class="com">
+                        <p>"{{ comment.content }}"</p>
+                        <p>
+                            par <b>{{ comment.pseudo }}</b>
+                        </p>
+                        <p>
+                            Pour l'article : <b>"{{ comment.title }}"</b>
+                        </p>
+                    </div>
+                   
+                    <div class="comChoice gap">
+                        <a class="btn bg-green" href="index.php?action=approveCom&id_comment={{comment.id_comment}}" id="approveCom">Approuver</a>
+                        <a class="btn bg-red" href="index.php?action=deleteCom&id_comment={{comment.id_comment}}" id="deleteCom">Supprimer</a>   
+                    </div>
+                        
+                </div>
+            {% endfor %}
+        </div>
+
+        
+    </section>
+
+{% endblock %}    

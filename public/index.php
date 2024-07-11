@@ -67,11 +67,15 @@ switch ($action) {
         $controller->register();
         break;
 
+    case "loginUser":
+        $controller = new AuthController();
+        $controller->loginUser();
+        break;
+
     case "login":
         $controller = new AuthController();
         $controller->login();
         break;
-
     case "logout":
         $controller = new AuthController();
         $controller->logout();

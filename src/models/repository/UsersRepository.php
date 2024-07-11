@@ -32,6 +32,15 @@ class UsersRepository
         $data = $query->fetch();
         return new User($data);
     }
+
+    public function readUser($user) {
+        $sql = 'SELECT * FROM user WHERE email = :email';
+        $query = $this->mysqlClient->prepare($sql);
+        $query->bindValue('email',$user->getEmail(), PDO::PARAM_STR);
+        $query->execute();
+        $dataUser = $query->fetch(PDO::FETCH_ASSOC);
+        return $dataUser;
+    }
 }
 
 ?>

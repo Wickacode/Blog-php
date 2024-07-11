@@ -27,18 +27,17 @@
         <li><a href="index.php">Accueil</a></li>
         <li><a href="index.php?action=articles">Projets</a></li>
         <li><a href="index.php?action=contact">Contact</a></li>
-        <li><a href="index.php?action=approveComments">Commentaires</a></li>
       </ul>
     </div>
  
     {% if session is defined  %} 
 
       <li>
-        <span>Bonjour {{ pseudo }}</span> 
+        <span>Bonjour {{ session.pseudo }}</span> 
         <ul>
             <li><a href="index.php?action=userManagement">Gérer votre compte</a></li>
                                     
-              {% if role == 1  %}
+              {% if session.role == 1  %}
                   <li class="li-item"><a href="index.php?action=administration">Administration</a></li>
               {% endif %} 
 

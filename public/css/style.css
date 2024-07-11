@@ -42,6 +42,9 @@
 .jcsb {
   justify-content: space-between;
 }
+.aic {
+  align-items: center;
+}
 
 .tac {
   text-align: center;
@@ -69,7 +72,7 @@ margin: 30px 0;
   flex-wrap: wrap;
 }
 
-/* Formualaires */
+/* Formulaires */
 .form-container {
   margin-bottom: 50px !important ;
 }
@@ -139,6 +142,15 @@ button.btn a {
   font-family: Arial, Helvetica, sans-serif;
 }
 
+.bg-green {
+  background-color: #67a878;
+  color: white;
+}
+.bg-red {
+  background-color: #9c4868;
+  color: white;
+}
+
 /* Barre de navigation */
 .nav-container {
 background: var(--dark);  
@@ -202,22 +214,59 @@ div.project-contain {
 
 /* Single Page */
 
+div.comment-container {
+  width: 90%;
+  padding: 20px;
+}
+div.comment {
+  border: 2px solid var(--light);
+  border-radius: 10px;
+  padding: 10px;
+  margin-bottom: 20px;
+}
 section.single-post {
   width: 100%;
 }
 
 div.left-container {
-  width: 70%;
-  border: 2px solid green;
-}
-div.right-container img {
-  -webkit-animation: slide-in-right 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94)
-    both;
-  animation: slide-in-right 1.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
-  height: auto;
-  border: 2px solid red;
+  width: 50%;
 }
 
+div.right-container {
+  width: 50%;
+  height: 500px;
+  border: 2px solid rgb(61, 101, 143);
+}
+
+div.right-container img {
+  -webkit-animation: slide-in-right 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+  animation: slide-in-right 1.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+  border: 2px solid red;
+  width: 600px;
+}
+
+/* ListCom pages  */
+
+div.listComments {
+  margin-bottom: 150px;
+}
+
+div.gestionComment {
+  border-radius: 20px;
+  padding: 15px;
+  width: 70%;
+  margin: 10px 0;
+}
+
+div.com {
+  width: 70%;
+}
+
+div.comChoice {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
 /* @-webkit-keyframes slide-in-right {
   0% {
     -webkit-transform: translateX(1000px);

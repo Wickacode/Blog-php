@@ -14,7 +14,7 @@ class ArticlesController extends Controller
     {
         $repository = new ArticlesRepository();
         $articles = $repository->getArticles();
-        echo $this->twig->render('portfolio.html.twig', ["articles" => $articles]);
+        echo $this->render('portfolio.html.twig', ["articles" => $articles]);
     }
  
     public function Article()
@@ -24,7 +24,7 @@ class ArticlesController extends Controller
         $article = $repositoryArticles->getArticle($id);
         $repositoryComments = new CommentsRepository();
         $comments = $repositoryComments->getComments($id);
-        echo $this->twig->render('article.html.twig', ["article" => $article, "comments" => $comments]);
+        echo $this->render('article.html.twig', ["article" => $article, "comments" => $comments]);
     }
 
     public function createArticle()
@@ -53,13 +53,13 @@ class ArticlesController extends Controller
                 $validAdd = "L'article a bien été ajouté";
             } else {
                 $error = "Tous les champs doivent être saisis";
-                echo $this->twig->render('createArticle.html.twig', ["error" => $error]);
+                echo $this->render('createArticle.html.twig', ["error" => $error]);
             }
         }
         if (isset($validAdd)) {
-            echo $this->twig->render('createArticle.html.twig', ["validAdd" => $validAdd]);
+            echo $this->render('createArticle.html.twig', ["validAdd" => $validAdd]);
         } else {
-            echo $this->twig->render('createArticle.html.twig');
+            echo $this->render('createArticle.html.twig');
         }
 
     }
@@ -80,7 +80,7 @@ class ArticlesController extends Controller
 
             } else {
                 $error = "Tous les champs doivent être saisis";
-                echo $this->twig->render('createArticle.html.twig', ["error" => $error]);
+                echo $this->render('createArticle.html.twig', ["error" => $error]);
             }
         }
     }
@@ -89,7 +89,7 @@ class ArticlesController extends Controller
         $commentsRepository = new CommentsRepository();
         $comments = $commentsRepository->listComments();
         
-        echo $this->twig->render('listComments.html.twig', ["comments" => $comments]);
+        echo $this->render('listComments.html.twig', ["comments" => $comments]);
     }
 
     public function approveCom()

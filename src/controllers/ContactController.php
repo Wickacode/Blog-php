@@ -6,6 +6,6 @@ class ContactController extends Controller
 {
     public function contact()
     {
-        echo $this->twig->render('contact.html.twig');
+        echo $this->render('contact.html.twig');
     }
 } 
