@@ -31,10 +31,9 @@
     </div>
  
     {% if session is defined  %} 
-
-      <li>
-        <span>Bonjour {{ session.pseudo }}</span> 
-        <ul>
+    <div class="df">
+    <span class="hello-user" >Bonjour {{ session.pseudo }} !</span> 
+        <ul class="menu-user">
             <li><a href="index.php?action=userManagement">Gérer votre compte</a></li>
                                     
               {% if session.role == 1  %}
@@ -43,7 +42,7 @@
 
             <li class="li-item"><a href="index.php?action=logout">Déconnexion</a></li>
         </ul>
-      </li>
+      </div>
 
       {% else %}
       <div class="light">

@@ -30,6 +30,7 @@ class Controller
                 'debug' => true,
             ]
         );
+        
         $this->session = filter_var_array($_SESSION);
         if (isset($this->session['user'])) {
             $this->user = $this->session['user'];
@@ -37,28 +38,28 @@ class Controller
         if (isset($this->user)) {
             $this->twig->addGlobal("session", $this->user);
         }
+
+        // $this->twig->addGlobal("session", $_SESSION);
+
         //define the constant to recover the good css file
         define('view', $view);
 
-        if (file_exists(ROOT ."/src/views/front/" . $view)) {
+        if (file_exists(ROOT . "/src/views/front/" . $view)) {
             echo $this->twig->render('front/' . $view, $data);
         } else {
             echo $this->twig->render('back/' . $view, $data);
         }
         // echo $this->twig->render($view, $data);
-
     }
 
     public function createSession(array $sessionDatas)
     {
         $this->session["user"] = [
-            'sessionId' => session_id(),
             'idUser' => $sessionDatas['id_user'],
             'firstname' => $sessionDatas['firstname'],
             'lastname' => $sessionDatas['lastname'],
             'pseudo' => $sessionDatas['pseudo'],
             'email' => $sessionDatas['email'],
-            'password' => $sessionDatas['password'],
             'role' => $sessionDatas['role']
         ];
         $this->user = $this->session['user'];
@@ -66,3 +67,4 @@ class Controller
         return $_SESSION['user'];
     }
 }
+

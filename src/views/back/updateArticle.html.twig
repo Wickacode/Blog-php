@@ -1,0 +1,35 @@
+{% extends 'base.html.twig' %} {% block body %}
+<div class="body-width">
+    <h1 class="page-title">Ajouter un article</h1>
+</div>
+
+ <section class=" form-container body-width dfull">
+
+    <div class="contact-form w50">
+        <form action="index.php?action=updateArticle" method="POST" enctype="multipart/form-data">
+            <label for="title">Titre :</label>
+            <input type="text" id="title" name="title"  value="{{article.title}}" required>
+
+            <label for="chapo">Chapo :</label>
+            <input type="chapo" id="chapo" name="chapo"  value="{{article.chapo}}" required>
+
+            <label for="content">Description :</label>
+            <textarea type="text" id="content" name="content" required>{{article.content}} </textarea>
+
+            <label for="uploadfile">Image :</label>
+            <input type="file" id="uploadfile" name="uploadfile" accept="image/png, image/jpeg">
+
+            <label for="altImage">Description de l'image :</label>
+            <input type="text" class="form-control" id="altImage" name="altImage" value="{{article.alt}}" >
+
+            <button name="modifyArticle" type="submit" class="btn dark bg-light-blue">Modifier</button>
+        </form>
+    </div>
+    {% if error is defined %}
+            <br /><p>{{ error }}</p>
+    {% endif %}
+    {% if validAdd is defined %}
+            <br /><p>{{ validAdd }}</p>
+    {% endif %}
+</section>
+{% endblock %}

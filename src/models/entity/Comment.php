@@ -8,6 +8,9 @@ class Comment {
     private int $id_article;
     private int $id_user;
 
+    private string $title;
+    private string $pseudo;
+
     //L'hydratation 
     //Méthode magique 
     public function __construct(array $data) {
@@ -40,6 +43,14 @@ class Comment {
         return $this->id_article;
     }
 
+    public function getTitle():string {
+        return $this->title;
+    }
+
+    public function getPseudo():string {
+        return $this->pseudo;
+    }
+
     //Setter
     //Assigne la valeur à l'attribut
     public function setId_comment(int $id_comment) {
@@ -60,5 +71,13 @@ class Comment {
 
     public function setId_article(int $id_article) {
         $this->id_article = $id_article;
+    }
+
+    public function setTitle(string $title) {
+        $this->title = $title;
+    }
+
+    public function setPseudo(string $pseudo) {
+        $this->pseudo = $pseudo;
     }
 }

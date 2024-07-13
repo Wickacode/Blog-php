@@ -36,7 +36,11 @@ class CommentsRepository
         $query = $this->mysqlClient->prepare($sql);
         $query->execute();
         $dataComments = $query->fetchAll();
-        return $dataComments;
+        $comments = [];
+        foreach($dataComments as $comment) {
+            $comments[]= new Comment($comment);
+        }
+        return $comments;
     }
     public function validCom($idCom) {
         $sql = 'UPDATE comment SET statut = 1 WHERE id_comment = :id_comment';

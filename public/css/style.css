@@ -245,6 +245,22 @@ div.right-container img {
   width: 600px;
 }
 
+/* Menu user  */
+
+span.hello-user {
+  font-size: 1em;
+  color: var(--light-blue);
+  text-align: center;
+  padding: 20px;
+  border: 2px solid var(--light-blue);
+}
+ul.menu-user {
+  color: var(--dark);
+  background-color: var(--light-blue);
+  padding: 15px;
+
+}
+
 /* ListCom pages  */
 
 div.listComments {

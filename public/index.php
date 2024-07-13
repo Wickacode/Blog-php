@@ -37,6 +37,16 @@ switch ($action) {
         $controller->createArticle();
         break;
 
+    case "formUpdateArticle":
+        $controller = new ArticlesController();
+        $controller->formUpdateArticle();
+        break;
+
+    case "updateArticle":
+        $controller = new ArticlesController();
+        $controller->updateArticle();
+        break;
+
     case "createComment":
         $controller = new ArticlesController();
         $controller->createComment();

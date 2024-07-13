@@ -49,31 +49,38 @@ class AuthController extends Controller
     public function loginUser()
     {
         if (isset($_POST['submitLogin'])) {
-            // $user = New User();
             if (!empty($_POST['email']) && !empty($_POST['password'])) {
                 $repository = new UsersRepository();
                 $user = $repository->getUserByEmail($_POST['email']);
-                $dataUser = $repository->readUser($user);
 
-                if (password_verify($_POST['password'], $user->getPassword())) {
-                    $this->createSession($dataUser);
-                    echo $this->render('home.html.twig');                         
+                if (isset($user)) {
+                    $dataUser = $repository->readUser($user);
+                    
+                    if (password_verify($_POST['password'], $user->getPassword())) {
+                        $this->createSession($dataUser);
+                        echo $this->render('home.html.twig');
+                    } else {
+                        $error = "Le mot de passe est incorrect";
+                        echo $this->render('login.html.twig', ["error" => $error]);
+                    }
+
                 } else {
-                    $error = "Le mot de passe est incorrect";
-                    echo $this->render('login.html.twig', ["error" => $error]);
+                    $error = "Le mail est incorrect";
+                        echo $this->render('login.html.twig', ["error" => $error]);
                 }
             }
         }
     }
 
-    public function login() {
+    public function login()
+    {
         echo $this->render('login.html.twig');
     }
 
     public function logout()
-    {  
-        unset($_SESSION["user"]);
+    {
+        unset($_SESSION['user']);
         echo $this->render('home.html.twig');
-    }
 
+    }
 }

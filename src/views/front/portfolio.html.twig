@@ -17,7 +17,9 @@
       <button class="btn dark bg-light-blue">
         <a href="index.php?action=article&id_article={{article.id_article}}">Voir plus</a>
       </button>
-      <a href="index.php?action=createArticle"> Ajouter un article </a>
+      {% if session.role == 1  %}
+      <a href="index.php?action=formUpdateArticle&id_article={{article.id_article}}"> Modifier un article </a>
+      {% endif %}
     </div>
   </div>
   {% endfor %}

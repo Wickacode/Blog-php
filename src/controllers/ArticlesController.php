@@ -16,7 +16,7 @@ class ArticlesController extends Controller
         $articles = $repository->getArticles();
         echo $this->render('portfolio.html.twig', ["articles" => $articles]);
     }
- 
+
     public function Article()
     {
         $id = $_GET["id_article"];
@@ -35,7 +35,8 @@ class ArticlesController extends Controller
             if (isset($_FILES["uploadfile"]["name"]) && !empty($_FILES["uploadfile"]["name"])) {
                 $filename = $_FILES["uploadfile"]["name"];
                 $folder = "C:/wamp64/www/Blog-php/public/img/upload/" . $filename;
-                if (move_uploaded_file($_FILES["uploadfile"]["tmp_name"], $folder));
+                if (move_uploaded_file($_FILES["uploadfile"]["tmp_name"], $folder))
+                    ;
                 $stockImg = "http://localhost/BLOG-PHP/public/img/upload/" . $filename;
             }
             if (!empty($_POST['title']) && !empty($_POST['chapo']) && !empty($_POST['content']) && !empty($_POST['altImage'])) {
@@ -64,15 +65,40 @@ class ArticlesController extends Controller
 
     }
 
+    public function formUpdateArticle()
+    {
+        $idArticle = $_GET['id_article'];
+        $repositoryArticle = new ArticlesRepository();
+        $article = $repositoryArticle->getArticle($idArticle);
+        echo $this->render('updateArticle.html.twig', ["article" => $article]);
+
+    }
+
+    public function updateArticle()
+    {
+        if (isset($_POST['modifyArticle'])) {
+            if (!empty($_POST['title'] && !empty($_POST['chapo']) && !empty($_POST['content']) && !empty($_POST['alt']))) {
+                $idArticle = $_GET['id_article'];
+                $repositoryArticle = new ArticlesRepository();
+                $article = $repositoryArticle->getArticle($idArticle);
+                echo $this->render('updateArticle.html.twig', ["article" => $article]);
+            }
+
+        }
+
+
+    }
+
     public function createComment()
     {
         if (isset($_POST['submitComment'])) {
             if (!empty($_POST['message'])) {
                 $comment = new Comment([
                     "content" => $_POST['message'],
-                    "id_user"=> (int)$_SESSION['userId'],
-                    "id_article" => (int)$_GET["id_article"]
+                    "id_user" => (int) $_SESSION['user']['idUser'],
+                    "id_article" => (int) $_GET["id_article"]
                 ]);
+
                 $repositoryComment = new CommentsRepository();
                 $repositoryComment->addComment($comment);
                 $validAddComment = "Le commentaire est en cours de validation";
@@ -88,7 +114,7 @@ class ArticlesController extends Controller
     {
         $commentsRepository = new CommentsRepository();
         $comments = $commentsRepository->listComments();
-        
+
         echo $this->render('listComments.html.twig', ["comments" => $comments]);
     }
 
