@@ -1,0 +1,31 @@
+{% extends 'base.html.twig' %} {% block body %}
+
+    <section class="CommentsContainer">
+    <h1 class="page-title">Liste des articles</h1>
+        <div class="listComments dfull fdc">
+            {% for article in articles %}
+                <div class="gestionComment dfull gap bxs">
+                    <div class="com">
+                        <p>"{{ article.title }}"</p>
+                        <p>
+                            Publié le: <b>"{{ article.date_publication | date('d-m-Y') }}"</b>
+                        </p>
+
+                        <p>
+                            Modifié le: <b>"{% if article.date_publication != article.date_modification %} {{ article.date_modification | date('d-m-Y') }} {% else %} {{ "---" }} {% endif %}"</b>
+                        </p>
+                    </div>
+                   
+                    <div class="comChoice gap">
+                        <a class="btn bg-green" href="index.php?action=formUpdateArticle&id_article={{article.id_article}}" id="formUpdateArticle">Modifier</a>
+                        <a class="btn bg-red" href="index.php?action=formUpdateArticle&id_article={{article.id_article}}" id="deleteArticle">Supprimer</a>   
+                    </div>
+                        
+                </div>
+            {% endfor %}
+        </div>
+
+        
+    </section>
+
+{% endblock %}    

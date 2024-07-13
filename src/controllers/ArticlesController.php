@@ -65,6 +65,12 @@ class ArticlesController extends Controller
 
     }
 
+    public function getListArticles(){
+        $repository = new ArticlesRepository();
+        $articles = $repository->getArticles();
+        echo $this->render('listArticles.html.twig', ["articles" => $articles]);
+    }
+
     public function formUpdateArticle()
     {
         $idArticle = $_GET['id_article'];
