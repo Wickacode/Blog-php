@@ -65,7 +65,8 @@ class ArticlesController extends Controller
 
     }
 
-    public function getListArticles(){
+    public function getListArticles()
+    {
         $repository = new ArticlesRepository();
         $articles = $repository->getArticles();
         echo $this->render('listArticles.html.twig', ["articles" => $articles]);
@@ -82,17 +83,35 @@ class ArticlesController extends Controller
 
     public function updateArticle()
     {
+        $date = date('Y-m-d');
         $repositoryArticle = new ArticlesRepository();
-        $articles = $repositoryArticle->getArticles();
         if (isset($_POST['modifyArticle'])) {
-
-            if (!empty($_POST['title'] && !empty($_POST['chapo']) && !empty($_POST['content']) && !empty($_POST['alt']))) {
+            if (isset($_FILES["uploadfile"]["name"]) && !empty($_FILES["uploadfile"]["name"])) {
+                $filename = $_FILES["uploadfile"]["name"];
+                $folder = "C:/wamp64/www/Blog-php/public/img/upload/" . $filename;
+                if (move_uploaded_file($_FILES["uploadfile"]["tmp_name"], $folder));
+                $stockImg = "http://localhost/BLOG-PHP/public/img/upload/" . $filename;
+            }
+            if (!empty($_POST['title'] && !empty($_POST['chapo']) && !empty($_POST['content']) && !empty($_POST['altImage']))) {
                 $idArticle = $_GET['id_article'];
                 $article = $repositoryArticle->getArticle($idArticle);
-                
+                if(isset($stockImg)) {
+                    $newImage = $stockImg;
+                    } else {
+                    $newImage = $article->getImage();
+                    }
+                $article = new Article([
+                    "title" => $_POST['title'],
+                    "chapo" => $_POST['chapo'],
+                    "content" => $_POST['content'],
+                    "date_modification" => $date,
+                    "image" => $newImage,
+                    "alt" => $_POST['altImage']
+                ]);
+                $repositoryArticle->changeArticle($idArticle, $article);
+                $articles = $repositoryArticle->getArticles();
+                echo $this->render('listArticles.html.twig', ["articles" => $articles]);
             }
-            echo $this->render('listArticles.html.twig', ["articles" => $articles]);
-
         }
     }
 
