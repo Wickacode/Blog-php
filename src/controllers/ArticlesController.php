@@ -82,17 +82,18 @@ class ArticlesController extends Controller
 
     public function updateArticle()
     {
+        $repositoryArticle = new ArticlesRepository();
+        $articles = $repositoryArticle->getArticles();
         if (isset($_POST['modifyArticle'])) {
+
             if (!empty($_POST['title'] && !empty($_POST['chapo']) && !empty($_POST['content']) && !empty($_POST['alt']))) {
                 $idArticle = $_GET['id_article'];
-                $repositoryArticle = new ArticlesRepository();
                 $article = $repositoryArticle->getArticle($idArticle);
-                echo $this->render('updateArticle.html.twig', ["article" => $article]);
+                
             }
+            echo $this->render('listArticles.html.twig', ["articles" => $articles]);
 
         }
-
-
     }
 
     public function createComment()
