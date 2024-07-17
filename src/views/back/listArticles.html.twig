@@ -6,7 +6,7 @@
             {% for article in articles %}
                 <div class="gestionComment dfull gap bxs">
                     <div class="com">
-                        <p>"{{ article.title }}"</p>
+                    <a href="index.php?action=article&id_article={{article.id_article}}">{{ article.title }}</a>
                         <p>
                             Publié le: <b>"{{ article.date_publication | date('d-m-Y') }}"</b>
                         </p>
