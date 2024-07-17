@@ -61,4 +61,14 @@ class CommentsRepository
         $data = $query->execute();
         return $data;
     }
+
+    public function removeCom($idArticle)
+    {
+        $sql = "DELETE FROM comment WHERE id_article = :id_article";
+        $query = $this->mysqlClient->prepare($sql);
+        $query->bindValue(':id_article', $idArticle, PDO::PARAM_INT);
+        $data = $query->execute();
+        return $data;
+        
+    }
 }

@@ -19,13 +19,16 @@ class ArticlesController extends Controller
 
     public function Article()
     {
+        if (!empty($_GET['id_article'])) {
         $id = $_GET["id_article"];
         $repositoryArticles = new ArticlesRepository();
         $article = $repositoryArticles->getArticle($id);
         $repositoryComments = new CommentsRepository();
         $comments = $repositoryComments->getComments($id);
         echo $this->render('article.html.twig', ["article" => $article, "comments" => $comments]);
-    }
+    } else {
+        echo $this->render('error404.html.twig');
+    }}
 
     public function createArticle()
     {
@@ -72,14 +75,17 @@ class ArticlesController extends Controller
         echo $this->render('listArticles.html.twig', ["articles" => $articles]);
     }
 
-    public function formUpdateArticle()
+    public function formUpdateArticle() {
+        if (!empty($_GET['id_article'])) 
     {
         $idArticle = $_GET['id_article'];
         $repositoryArticle = new ArticlesRepository();
         $article = $repositoryArticle->getArticle($idArticle);
         echo $this->render('updateArticle.html.twig', ["article" => $article]);
 
-    }
+    }else {
+        echo $this->render('error404.html.twig');
+    }}
 
     public function updateArticle()
     {
@@ -114,6 +120,23 @@ class ArticlesController extends Controller
             }
         }
     }
+
+    public function deleteArticle()
+{
+    if (!empty($_GET['id_article'])) {
+        $idArticle = $_GET['id_article'];
+        $repositoryArticle = new ArticlesRepository();
+        $repositoryComment = new CommentsRepository();
+        $repositoryComment->removeCom($idArticle);
+        $repositoryArticle->removeArticle($idArticle);
+        $articles = $repositoryArticle->getArticles();
+        
+        echo $this->render('listArticles.html.twig', ["articles" => $articles]);
+    } else {
+        echo $this->render('error404.html.twig');
+    }
+}
+
 
     public function createComment()
     {

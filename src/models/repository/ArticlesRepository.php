@@ -75,4 +75,13 @@ class ArticlesRepository
         return $data;
     }
 
+    public function removeArticle($idArticle)
+    {
+        $sql = "DELETE FROM article WHERE id_article = :id_article";
+        $query = $this->mysqlClient->prepare($sql);
+        $query->bindValue(':id_article', $idArticle, PDO::PARAM_INT);
+        $data = $query->execute();
+        return $data;
+        
+    }
 }
