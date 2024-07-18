@@ -20,15 +20,16 @@ class ArticlesController extends Controller
     public function Article()
     {
         if (!empty($_GET['id_article'])) {
-        $id = $_GET["id_article"];
-        $repositoryArticles = new ArticlesRepository();
-        $article = $repositoryArticles->getArticle($id);
-        $repositoryComments = new CommentsRepository();
-        $comments = $repositoryComments->getComments($id);
-        echo $this->render('article.html.twig', ["article" => $article, "comments" => $comments]);
-    } else {
-        echo $this->render('error404.html.twig');
-    }}
+            $id = $_GET["id_article"];
+            $repositoryArticles = new ArticlesRepository();
+            $article = $repositoryArticles->getArticle($id);
+            $repositoryComments = new CommentsRepository();
+            $comments = $repositoryComments->getComments($id);
+            echo $this->render('article.html.twig', ["article" => $article, "comments" => $comments]);
+        } else {
+            echo $this->render('error404.html.twig');
+        }
+    }
 
     public function createArticle()
     {
@@ -71,21 +72,37 @@ class ArticlesController extends Controller
     public function getListArticles()
     {
         $repository = new ArticlesRepository();
-        $articles = $repository->getArticles();
-        echo $this->render('listArticles.html.twig', ["articles" => $articles]);
+        $articlesPublish = $repository->getArticlesPublishAdmin();
+        $articlesNoPublish = $repository->getArticlesNoPublishAdmin();
+
+        echo $this->render('listArticles.html.twig', ["articlesPublish" => $articlesPublish, "articlesNoPublish" => $articlesNoPublish]);
     }
 
-    public function formUpdateArticle() {
-        if (!empty($_GET['id_article'])) 
+    public function publishAdminArticle()
     {
-        $idArticle = $_GET['id_article'];
-        $repositoryArticle = new ArticlesRepository();
-        $article = $repositoryArticle->getArticle($idArticle);
-        echo $this->render('updateArticle.html.twig', ["article" => $article]);
+        if (!empty($_GET['id_article'])) {
+            $idArticle = $_GET['id_article'];
+            $repository = new ArticlesRepository();
+            $repository->publishArticleSQL($idArticle);
+            return header('location: http://localhost/BLOG-PHP/public/index.php?action=getListArticles');
 
-    }else {
-        echo $this->render('error404.html.twig');
-    }}
+        } else {
+            echo $this->render('error404.html.twig');
+        }
+    }
+
+    public function formUpdateArticle()
+    {
+        if (!empty($_GET['id_article'])) {
+            $idArticle = $_GET['id_article'];
+            $repositoryArticle = new ArticlesRepository();
+            $article = $repositoryArticle->getArticle($idArticle);
+            echo $this->render('updateArticle.html.twig', ["article" => $article]);
+
+        } else {
+            echo $this->render('error404.html.twig');
+        }
+    }
 
     public function updateArticle()
     {
@@ -95,17 +112,18 @@ class ArticlesController extends Controller
             if (isset($_FILES["uploadfile"]["name"]) && !empty($_FILES["uploadfile"]["name"])) {
                 $filename = $_FILES["uploadfile"]["name"];
                 $folder = "C:/wamp64/www/Blog-php/public/img/upload/" . $filename;
-                if (move_uploaded_file($_FILES["uploadfile"]["tmp_name"], $folder));
+                if (move_uploaded_file($_FILES["uploadfile"]["tmp_name"], $folder))
+                    ;
                 $stockImg = "http://localhost/BLOG-PHP/public/img/upload/" . $filename;
             }
             if (!empty($_POST['title'] && !empty($_POST['chapo']) && !empty($_POST['content']) && !empty($_POST['altImage']))) {
                 $idArticle = $_GET['id_article'];
                 $article = $repositoryArticle->getArticle($idArticle);
-                if(isset($stockImg)) {
+                if (isset($stockImg)) {
                     $newImage = $stockImg;
-                    } else {
+                } else {
                     $newImage = $article->getImage();
-                    }
+                }
                 $article = new Article([
                     "title" => $_POST['title'],
                     "chapo" => $_POST['chapo'],
@@ -115,27 +133,29 @@ class ArticlesController extends Controller
                     "alt" => $_POST['altImage']
                 ]);
                 $repositoryArticle->changeArticle($idArticle, $article);
-                $articles = $repositoryArticle->getArticles();
-                echo $this->render('listArticles.html.twig', ["articles" => $articles]);
+                $articlesPublish = $repositoryArticle->getArticlesPublishAdmin();
+                $articlesNoPublish = $repositoryArticle->getArticlesNoPublishAdmin();
+                echo $this->render('listArticles.html.twig', ["articlesPublish" => $articlesPublish, "articlesNoPublish" => $articlesNoPublish]);
+
             }
         }
     }
 
     public function deleteArticle()
-{
-    if (!empty($_GET['id_article'])) {
-        $idArticle = $_GET['id_article'];
-        $repositoryArticle = new ArticlesRepository();
-        $repositoryComment = new CommentsRepository();
-        $repositoryComment->removeCom($idArticle);
-        $repositoryArticle->removeArticle($idArticle);
-        $articles = $repositoryArticle->getArticles();
-        
-        echo $this->render('listArticles.html.twig', ["articles" => $articles]);
-    } else {
-        echo $this->render('error404.html.twig');
+    {
+        if (!empty($_GET['id_article'])) {
+            $idArticle = $_GET['id_article'];
+            $repositoryArticle = new ArticlesRepository();
+            $repositoryComment = new CommentsRepository();
+            $repositoryComment->removeCom($idArticle);
+            $repositoryArticle->removeArticle($idArticle);
+            $articlesPublish = $repositoryArticle->getArticlesPublishAdmin();
+            $articlesNoPublish = $repositoryArticle->getArticlesNoPublishAdmin();
+            echo $this->render('listArticles.html.twig', ["articlesPublish" => $articlesPublish, "articlesNoPublish" => $articlesNoPublish]);
+        } else {
+            echo $this->render('error404.html.twig');
+        }
     }
-}
 
 
     public function createComment()

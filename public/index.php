@@ -52,6 +52,11 @@ switch ($action) {
         $controller->updateArticle();
         break;
 
+        case "publishArticle":
+            $controller = new ArticlesController();
+            $controller->publishAdminArticle();
+            break;
+
     case "deleteArticle":
         $controller = new ArticlesController();
         $controller->deleteArticle();

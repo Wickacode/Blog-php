@@ -1,8 +1,11 @@
 {% extends 'base.html.twig' %} {% block body %}
 
-<h1>Administration</h1>
-<a href="index.php?action=listComments">Gerér les commentaire</a>
-<a>Gerér les utilisateurs</a>
-<a href="index.php?action=getListArticles">Gestion des articles</a>
+<h1 class="page-title">Administration</h1>
+<div class="dfull gap">
+<a class="btn bg-green btn-hover" href="index.php?action=listComments">Gestion des commentaire</a>
+<a class="btn bg-green btn-hover">Gestion des utilisateurs</a>
+<a class="btn bg-green btn-hover" href="index.php?action=getListArticles">Gestion des articles</a>
+</div>
+
 
 {% endblock %} 

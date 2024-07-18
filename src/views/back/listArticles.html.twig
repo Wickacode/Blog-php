@@ -2,23 +2,51 @@
 
     <section class="CommentsContainer">
     <h1 class="page-title">Liste des articles</h1>
+        <a class="btn bg-green dfull" href="index.php?action=createArticle" id="createArticle">Créer un nouvel article </a>
+
         <div class="listComments dfull fdc">
-            {% for article in articles %}
+
+            {% for articleNoPublish in articlesNoPublish %}
                 <div class="gestionComment dfull gap bxs">
                     <div class="com">
-                    <a href="index.php?action=article&id_article={{article.id_article}}">{{ article.title }}</a>
+                    <a href="index.php?action=article&id_article={{articleNoPublish.id_article}}">{{ articleNoPublish.title }}</a>
                         <p>
-                            Publié le: <b>"{{ article.date_publication | date('d-m-Y') }}"</b>
+                            Publié le: <b>"{{ articleNoPublish.date_publication | date('d-m-Y') }}"</b>
                         </p>
 
                         <p>
-                            Modifié le: <b>"{% if article.date_publication != article.date_modification %} {{ article.date_modification | date('d-m-Y') }} {% else %} {{ "---" }} {% endif %}"</b>
+                            Modifié le: <b>"{% if articleNoPublish.date_publication != articleNoPublish.date_modification %} {{ articleNoPublish.date_modification | date('d-m-Y') }} {% else %} {{ "---" }} {% endif %}"</b>
+                        </p>
+                    </div>
+
+                    <div class="comChoice gap">
+                    
+                        <a class="btn bg-green" href="index.php?action=formUpdateArticle&id_article={{articleNoPublish.id_article}}" id="formUpdateArticle">Modifier</a>
+                        <a class="btn bg-red" href="index.php?action=deleteArticle&id_article={{articleNoPublish.id_article}}" id="deleteArticle">Supprimer</a>   
+                        <a class="btn bg-red" href="index.php?action=publishArticle&id_article={{articleNoPublish.id_article}}" id="publishArticle">Publier</a>   
+                        
+                    </div>
+                        
+                </div>
+            {% endfor %}
+
+             {% for articlePublish in articlesPublish %}
+                <div class="gestionComment dfull gap bxs">
+                    <div class="com">
+                    <a href="index.php?action=article&id_article={.id_article}}">{{ articlePublish.title }}</a>
+                        <p>
+                            Publié le: <b>"{{ articlePublish.date_publication | date('d-m-Y') }}"</b>
+                        </p>
+
+                        <p>
+                            Modifié le: <b>"{% if articlePublish.date_publication != articlePublish.date_modification %} {{ articlePublish.date_modification | date('d-m-Y') }} {% else %} {{ "---" }} {% endif %}"</b>
                         </p>
                     </div>
                    
                     <div class="comChoice gap">
-                        <a class="btn bg-green" href="index.php?action=formUpdateArticle&id_article={{article.id_article}}" id="formUpdateArticle">Modifier</a>
-                        <a class="btn bg-red" href="index.php?action=deleteArticle&id_article={{article.id_article}}" id="deleteArticle">Supprimer</a>   
+                        <a class="btn bg-green" href="index.php?action=formUpdateArticle&id_article={{articlePublish.id_article}}" id="formUpdateArticle">Modifier</a>
+                        <a class="btn bg-red" href="index.php?action=deleteArticle&id_article={{articlePublish.id_article}}" id="deleteArticle">Supprimer</a>   
+                        
                     </div>
                         
                 </div>

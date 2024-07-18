@@ -14,7 +14,7 @@ class ArticlesRepository
 
     public function getArticles()
     {
-        $sql = 'SELECT * FROM article';
+        $sql = 'SELECT * FROM article WHERE delete_article=1';
         $query = $this->mysqlClient->prepare($sql);
         $query->execute();
         $dataArticles = $query->fetchAll();
@@ -24,15 +24,6 @@ class ArticlesRepository
         }
         return $articles;
     }
-
-    // public function getArticle($id){
-    //     $sql = 'SELECT * FROM article where id_article = :id_article';
-    //     $query = $this->mysqlClient->prepare($sql);
-    //     $query->bindValue(':id_article', $id, PDO::PARAM_INT);
-    //     $query->execute();
-    //     $dataArticle = $query->fetchAll();
-    //     return $dataArticle;
-    // }
 
     public function getArticle($id)
     {
@@ -44,8 +35,8 @@ class ArticlesRepository
 
     public function addArticle(Article $article)
     {
-        $sql = 'INSERT INTO article (title, chapo, content, date_publication, date_modification, image, alt, id_user)
-            VALUES (:title, :chapo, :content, :date_publication, :date_modification, :image, :alt, :id_user)';
+        $sql = 'INSERT INTO article (title, chapo, content, date_publication, date_modification, image, delete_article, alt, id_user)
+            VALUES (:title, :chapo, :content, :date_publication, :date_modification, :image, 0,:alt, :id_user)';
 
         $query = $this->mysqlClient->prepare($sql);
         $query->bindValue('title', $article->getTitle(), PDO::PARAM_STR);
@@ -62,7 +53,7 @@ class ArticlesRepository
 
     public function changeArticle($id_article, $article)
     {
-        $sql = 'UPDATE article SET title = :title, chapo = :chapo, content = :content, date_modification = :date_modification, image = :image, alt = :alt WHERE id_article = :id_article';
+        $sql = 'UPDATE article SET title = :title, chapo = :chapo, content = :content, date_modification = :date_modification, image = :image, delete_article=0,alt = :alt WHERE id_article = :id_article';
         $query = $this->mysqlClient->prepare($sql);
         $query->bindValue('title', $article->getTitle(), PDO::PARAM_STR);
         $query->bindValue('chapo', $article->getChapo(), PDO::PARAM_STR);
@@ -73,6 +64,41 @@ class ArticlesRepository
         $query->bindValue('id_article', $id_article, PDO::PARAM_INT);
         $data = $query->execute();
         return $data;
+    }
+
+    public function getArticlesPublishAdmin()
+    {
+        $sql = 'SELECT * FROM article WHERE delete_article = 1';
+        $query = $this->mysqlClient->prepare($sql);
+        $query->execute();
+        $dataArticles = $query->fetchAll();
+        $articles = [];
+        foreach ($dataArticles as $article) {
+            $articles[] = new Article($article);
+        }
+        return $articles;
+    }
+
+    public function publishArticleSQL($idArticle)
+    {
+        $sql = 'UPDATE article SET delete_article = 1 WHERE id_article = :id_article';
+        $query = $this->mysqlClient->prepare($sql);
+        $query->bindValue(':id_article', $idArticle, PDO::PARAM_INT);
+        $data = $query->execute(); 
+        return $data;
+    }
+
+    public function getArticlesNoPublishAdmin()
+    {
+        $sql = 'SELECT * FROM article WHERE delete_article = 0';
+        $query = $this->mysqlClient->prepare($sql);
+        $query->execute();
+        $dataArticles = $query->fetchAll();
+        $articles = [];
+        foreach ($dataArticles as $article) {
+            $articles[] = new Article($article);
+        }
+        return $articles;
     }
 
     public function removeArticle($idArticle)

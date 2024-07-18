@@ -1,6 +1,8 @@
 <?php
 namespace Models\Entity;
+
 use DateTime;
+
 class Article
 {
     private int $id_article;
@@ -10,20 +12,22 @@ class Article
     private DateTime $date_publication;
     private DateTime $date_modification;
     private string $image;
-    private string $alt;
     private bool $delete_article;
+
+    private string $alt;
 
     //L'hydratation 
     //Méthode magique 
-    public function __construct(array $data) {
-        foreach($data as $key=> $value ) {
-            $method= "set" .ucfirst($key);
-            if (method_exists($this,$method)) {
+    public function __construct(array $data)
+    {
+        foreach ($data as $key => $value) {
+            $method = "set" . ucfirst($key);
+            if (method_exists($this, $method)) {
                 $this->$method($value);
             }
         }
     }
- 
+
     //Getter
     public function getId_article(): int
     {
@@ -59,7 +63,7 @@ class Article
         return $this->alt;
     }
 
-    
+
     public function getDelete(): bool
     {
         return $this->delete_article;
