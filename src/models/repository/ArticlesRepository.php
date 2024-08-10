@@ -29,8 +29,13 @@ class ArticlesRepository
     {
         $request = $this->mysqlClient->query("SELECT * FROM article WHERE id_article = '$id' ");
         $result = ($request->fetch());
-        $article = new Article($result);
+        if($result) {
+               $article = new Article($result);
         return $article;
+        }
+
+        return null;
+     
     }
 
     public function addArticle(Article $article)

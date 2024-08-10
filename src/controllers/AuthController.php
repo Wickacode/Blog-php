@@ -7,6 +7,11 @@ use Models\Repository\UsersRepository;
 
 class AuthController extends Controller
 {
+    private UsersRepository $usersRepository;
+    public function __construct() {
+        $this->usersRepository= new UsersRepository();
+    }
+
     public function register()
     {
         //Gestion de la récupération et de la sauvegarde des données 
@@ -18,7 +23,7 @@ class AuthController extends Controller
                     "lastname" => $_POST['lastname'],
                     "email" => $_POST['email'],
                     "pseudo" => $_POST['pseudo'],
-                    "password" => $hashedpassword
+                    "password" => $hashedpassword 
                 ]);
 
             } else {
@@ -28,8 +33,7 @@ class AuthController extends Controller
             $passwordLength = strlen($_POST['password']);
             if ($passwordLength >= 8) {
                 if ($_POST['password'] == $_POST['confirmPass']) {
-                    $repository = new UsersRepository();
-                    $repository->addUser($user);
+                    $this->usersRepository->addUser($user);
                     $validAdd = "Votre compte a bien été crée, vous pouvez maintenant vous connecter";
                 } else {
                     $error = "Les mots de passe doivent être identiques.";
@@ -50,11 +54,10 @@ class AuthController extends Controller
     {
         if (isset($_POST['submitLogin'])) {
             if (!empty($_POST['email']) && !empty($_POST['password'])) {
-                $repository = new UsersRepository();
-                $user = $repository->getUserByEmail($_POST['email']);
+                $user = $this->usersRepository->getUserByEmail($_POST['email']);
 
                 if (isset($user)) {
-                    $dataUser = $repository->readUser($user);
+                    $dataUser = $this->usersRepository->readUser($user);
                     
                     if (password_verify($_POST['password'], $user->getPassword())) {
                         $this->createSession($dataUser);

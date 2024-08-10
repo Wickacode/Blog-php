@@ -13,7 +13,7 @@
       "license": "proprietary",
   
       "autoload": {
-          "psr-4": { "Models\\": "src/models", "Controllers\\": "src/controllers/"  },
+          "psr-4": { "Models\\": "src/models", "Controllers\\": "src/controllers/","Middlewares\\":"src/middlewares"  },
           "classmap": [ "src" ]
   
         },

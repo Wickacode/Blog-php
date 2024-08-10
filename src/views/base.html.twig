@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="css/style.css" />
     <link rel="stylesheet" href="css/contact-form.css" />
+    <link rel="stylesheet" href="css/responsive.css" />
+    
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     
@@ -15,7 +17,7 @@
   </head>
   <body>
   <nav>
-  <div class="nav-container dfull jcsb">
+  <div class="nav-container dfull jcsb wrap">
     <div class="logo-container">
       <a href="#">
         <img class="logo" src="img/jg-logo.png" alt="logo su site" />
@@ -32,7 +34,7 @@
  
     {% if session is defined  %} 
     <div class="df">
-    <span class="hello-user" >Bonjour {{ session.pseudo }} !</span> 
+    <span class="hello-user dfull wrap" >Bonjour {{ session.pseudo }} !</span> 
         <ul class="menu-user">
             <li><a href="index.php?action=userManagement">Gérer votre compte</a></li>
                                     
@@ -45,7 +47,7 @@
       </div>
 
       {% else %}
-      <div class="light">
+      <div class="dfull gap light">
         <a href="index.php?action=login">Se connecter</a>
         <a href="index.php?action=register">S'incrire</a>
       </div>

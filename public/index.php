@@ -6,6 +6,8 @@ use Controllers\HomeController;
 use Controllers\AuthController;
 use Controllers\AdminController;
 use Controllers\UsersController;
+use Middlewares\Admin;
+use Middlewares\Auth;
 
 //Activation de la super globale
 session_start();
@@ -33,51 +35,61 @@ switch ($action) {
         break;
 
     case "createArticle":
+        new Admin();
         $controller = new ArticlesController();
         $controller->createArticle();
         break;
 
     case "getListArticles":
+        new Admin();
         $controller = new ArticlesController();
         $controller->getListArticles();
         break;
 
     case "formUpdateArticle":
+        new Admin();
         $controller = new ArticlesController();
         $controller->formUpdateArticle();
         break;
 
     case "updateArticle":
+        new Admin();
         $controller = new ArticlesController();
         $controller->updateArticle();
         break;
 
-        case "publishArticle":
-            $controller = new ArticlesController();
-            $controller->publishAdminArticle();
-            break;
+    case "publishArticle":
+        new Admin();
+        $controller = new ArticlesController();
+        $controller->publishAdminArticle();
+        break;
 
     case "deleteArticle":
+        new Admin();
         $controller = new ArticlesController();
         $controller->deleteArticle();
         break;
 
     case "createComment":
+        new Auth();
         $controller = new ArticlesController();
         $controller->createComment();
         break;
 
     case "listComments":
+        new Admin();
         $controller = new ArticlesController();
         $controller->listComments();
         break;
 
     case "approveCom":
+        new Admin();
         $controller = new ArticlesController();
         $controller->approveCom();
         break;
 
     case "deleteCom":
+        new Admin();
         $controller = new ArticlesController();
         $controller->deleteCom();
         break;
@@ -107,11 +119,13 @@ switch ($action) {
         break;
 
     case "administration":
+        new Admin();
         $controller = new AdminController();
         $controller->administration();
         break;
 
     case "userManagement":
+        new Admin();
         $controller = new UsersController();
         $controller->userManagement();
         break;

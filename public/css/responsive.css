@@ -1,0 +1,28 @@
+@media (max-width:800px) {
+
+    .nav-container {
+        padding: 20px 10px;
+        justify-content: center;
+    }
+    div.navigation-links-container ul {
+        gap: 1em;
+        font-size: 1em;
+      }
+
+      #home-intro div {
+        flex-direction: column;
+      }
+
+      #home-intro-text {
+        flex-direction: column;
+        margin: 0;
+      }
+
+      #home-intro-text div{
+        width: 100%;
+      }
+
+      #home-intro-text p {
+        margin: 25px;
+      }
+}
