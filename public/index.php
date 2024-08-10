@@ -104,6 +104,11 @@ switch ($action) {
         $controller->register();
         break;
 
+    case "registerView":
+        $controller = new AuthController();
+        $controller->registerView();
+        break;
+
     case "loginUser":
         $controller = new AuthController();
         $controller->loginUser();

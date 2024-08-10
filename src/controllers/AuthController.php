@@ -13,6 +13,11 @@ class AuthController extends Controller
         $this->usersRepository = new UsersRepository();
     }
 
+    public function registerView()
+    {
+        echo $this->render('register.html.twig');
+
+    }
     public function register()
     {
         //Gestion de la récupération et de la sauvegarde des données 
@@ -32,8 +37,8 @@ class AuthController extends Controller
                 echo $this->render('register.html.twig', ["error" => $error]);
             }
             $verifMailPseudo = $this->usersRepository->countMailPseudo($user);
-            if ($verifMailPseudo < 1) {
-                $passwordLength = strlen($_POST['password']);
+            $passwordLength = strlen($_POST['password']);
+            if ($verifMailPseudo['nbMailPseudo'] === '0') {
                 if ($passwordLength >= 8) {
                     if ($_POST['password'] == $_POST['confirmPass']) {
                         $this->usersRepository->addUser($user);
@@ -53,8 +58,6 @@ class AuthController extends Controller
         }
         if (isset($validAdd)) {
             echo $this->render('login.html.twig', ["validAdd" => $validAdd]);
-        } else {
-            echo $this->render('register.html.twig');
         }
 
     }
