@@ -8,8 +8,9 @@ use Models\Repository\UsersRepository;
 class AuthController extends Controller
 {
     private UsersRepository $usersRepository;
-    public function __construct() {
-        $this->usersRepository= new UsersRepository();
+    public function __construct()
+    {
+        $this->usersRepository = new UsersRepository();
     }
 
     public function register()
@@ -23,24 +24,30 @@ class AuthController extends Controller
                     "lastname" => $_POST['lastname'],
                     "email" => $_POST['email'],
                     "pseudo" => $_POST['pseudo'],
-                    "password" => $hashedpassword 
+                    "password" => $hashedpassword
                 ]);
 
             } else {
                 $error = "Tous les champs doivent être saisis";
                 echo $this->render('register.html.twig', ["error" => $error]);
             }
-            $passwordLength = strlen($_POST['password']);
-            if ($passwordLength >= 8) {
-                if ($_POST['password'] == $_POST['confirmPass']) {
-                    $this->usersRepository->addUser($user);
-                    $validAdd = "Votre compte a bien été crée, vous pouvez maintenant vous connecter";
+            $verifMailPseudo = $this->usersRepository->countMailPseudo($user);
+            if ($verifMailPseudo < 1) {
+                $passwordLength = strlen($_POST['password']);
+                if ($passwordLength >= 8) {
+                    if ($_POST['password'] == $_POST['confirmPass']) {
+                        $this->usersRepository->addUser($user);
+                        $validAdd = "Votre compte a bien été crée, vous pouvez maintenant vous connecter";
+                    } else {
+                        $error = "Les mots de passe doivent être identiques.";
+                        echo $this->render('register.html.twig', ["error" => $error]);
+                    }
                 } else {
-                    $error = "Les mots de passe doivent être identiques.";
+                    $error = "Le mot de passe doit contenir minimum 8 caractères.";
                     echo $this->render('register.html.twig', ["error" => $error]);
                 }
             } else {
-                $error = "Le mot de passe doit contenir minimum 8 caractères.";
+                $error = "L'adresse email ou le pseudo sont déjà pris";
                 echo $this->render('register.html.twig', ["error" => $error]);
             }
         }
@@ -49,6 +56,7 @@ class AuthController extends Controller
         } else {
             echo $this->render('register.html.twig');
         }
+
     }
     public function loginUser()
     {
@@ -58,7 +66,7 @@ class AuthController extends Controller
 
                 if (isset($user)) {
                     $dataUser = $this->usersRepository->readUser($user);
-                    
+
                     if (password_verify($_POST['password'], $user->getPassword())) {
                         $this->createSession($dataUser);
                         echo $this->render('home.html.twig');
@@ -69,7 +77,7 @@ class AuthController extends Controller
 
                 } else {
                     $error = "Le mail est incorrect";
-                        echo $this->render('login.html.twig', ["error" => $error]);
+                    echo $this->render('login.html.twig', ["error" => $error]);
                 }
             }
         }

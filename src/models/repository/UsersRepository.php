@@ -41,6 +41,14 @@ class UsersRepository
         $dataUser = $query->fetch(PDO::FETCH_ASSOC);
         return $dataUser;
     }
-}
 
-?>
+    public function countMailPseudo($user) {
+        $sql = ' SELECT COUNT(*) FROM user WHERE email = :email OR pseudo = :pseudo';
+        $query = $this->mysqlClient->prepare($sql);
+        $query->bindValue('email',$user->getEmail(), PDO::PARAM_STR);
+        $query->bindValue('pseudo',$user->getPseudo(), PDO::PARAM_STR);
+        $query->execute();
+        $dataCount = $query->fetch(PDO::FETCH_ASSOC);
+        return $dataCount;
+    }
+}
