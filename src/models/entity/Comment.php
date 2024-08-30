@@ -4,10 +4,8 @@ class Comment {
     private int $id_comment;
     private string $content;
     private bool $delete_comment;
-
     private int $id_article;
     private int $id_user;
-
     private string $title;
     private string $pseudo;
 

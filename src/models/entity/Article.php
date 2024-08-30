@@ -13,7 +13,6 @@ class Article
     private DateTime $date_modification;
     private string $image;
     private bool $delete_article;
-
     private string $alt;
 
     //L'hydratation 

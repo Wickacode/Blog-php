@@ -4,14 +4,9 @@ namespace Models\Repository;
 use Models\Entity\Article;
 use PDO;
 
-class ArticlesRepository
+class ArticlesRepository extends Repository
 {
-    private PDO $mysqlClient;
-    public function __construct()
-    {
-        $this->mysqlClient = new PDO('mysql:host=localhost;dbname=blog-php;charset=utf8', 'root', '', [PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION]);
-    }
-
+    // Récupère tous les articles publiés
     public function getArticles()
     {
         $sql = 'SELECT * FROM article WHERE delete_article=1';
@@ -24,7 +19,7 @@ class ArticlesRepository
         }
         return $articles;
     }
-
+    // Récupère un article spécifique basé sur son identifiant $id
     public function getArticle($id)
     {
         $request = $this->mysqlClient->query("SELECT * FROM article WHERE id_article = '$id' ");
@@ -35,9 +30,8 @@ class ArticlesRepository
         }
 
         return null;
-     
     }
-
+    //  Ajoute un nouvel article dans la base de données
     public function addArticle(Article $article)
     {
         $sql = 'INSERT INTO article (title, chapo, content, date_publication, date_modification, image, delete_article, alt, id_user)
@@ -56,6 +50,7 @@ class ArticlesRepository
 
     }
 
+    //Modifie un article existant identifié par $id_article
     public function changeArticle($id_article, $article)
     {
         $sql = 'UPDATE article SET title = :title, chapo = :chapo, content = :content, date_modification = :date_modification, image = :image, delete_article=0,alt = :alt WHERE id_article = :id_article';
@@ -70,7 +65,7 @@ class ArticlesRepository
         $data = $query->execute();
         return $data;
     }
-
+    //Récupère tous les articles publiés (delete_article = 1) pour l'administration
     public function getArticlesPublishAdmin()
     {
         $sql = 'SELECT * FROM article WHERE delete_article = 1';
@@ -83,7 +78,7 @@ class ArticlesRepository
         }
         return $articles;
     }
-
+    //Publie un article en définissant delete_article à 1 pour l'article identifié par $idArticle
     public function publishArticleSQL($idArticle)
     {
         $sql = 'UPDATE article SET delete_article = 1 WHERE id_article = :id_article';
@@ -92,7 +87,7 @@ class ArticlesRepository
         $data = $query->execute(); 
         return $data;
     }
-
+    //Récupère tous les articles non publiés (delete_article = 0) pour l'administration
     public function getArticlesNoPublishAdmin()
     {
         $sql = 'SELECT * FROM article WHERE delete_article = 0';
@@ -105,7 +100,7 @@ class ArticlesRepository
         }
         return $articles;
     }
-
+    //Supprime définitivement un article de la base de données basé sur son identifiant $idArticle
     public function removeArticle($idArticle)
     {
         $sql = "DELETE FROM article WHERE id_article = :id_article";

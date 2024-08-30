@@ -1,8 +1,14 @@
 {% extends 'base.html.twig' %} {% block body %}
 
+    <div class="pagesNav">
+    <a href="index.php?action=administration">← Revenir au menu d'administration</a>
+    </div>
+
     <section class="CommentsContainer">
     <h1 class="page-title">Liste des articles</h1>
-        <a class="btn bg-green dfull" href="index.php?action=createArticle" id="createArticle">Créer un nouvel article </a>
+    <div class="dfull">
+        <a class="btn bg-green" href="index.php?action=createArticle" id="createArticle">Créer un nouvel article </a>
+    </div>
 
         <div class="listComments dfull fdc">
 

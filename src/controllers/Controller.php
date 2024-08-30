@@ -11,15 +11,6 @@ class Controller
     private $session;
     private $user;
 
-    public function __construct()
-    {
-        // //On paramètre le dossier contenant les templates
-        // $this->loader = new FilesystemLoader(ROOT .'\src\views');
-
-        // //On paramètre l'environnement twig
-        // $this->twig = new Environment($this->loader);
-        // $this->twig->addGlobal("session", $_SESSION);
-    }
     public function render(string $view, array $data = [])
     {
         $loader = new FilesystemLoader(ROOT . '\src\views');
@@ -39,9 +30,6 @@ class Controller
             $this->twig->addGlobal("session", $this->user);
         }
 
-        // $this->twig->addGlobal("session", $_SESSION);
-
-        //define the constant to recover the good css file
         define('view', $view);
 
         if (file_exists(ROOT . "/src/views/front/" . $view)) {
@@ -49,7 +37,6 @@ class Controller
         } else {
             echo $this->twig->render('back/' . $view, $data);
         }
-        // echo $this->twig->render($view, $data);
     }
 
     public function createSession(array $sessionDatas)
@@ -67,4 +54,3 @@ class Controller
         return $_SESSION['user'];
     }
 }
-

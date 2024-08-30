@@ -95,6 +95,5 @@ class AuthController extends Controller
     {
         unset($_SESSION['user']);
         echo $this->render('home.html.twig');
-
     }
 }

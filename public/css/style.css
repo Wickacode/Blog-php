@@ -139,6 +139,7 @@ padding: 20px;
   border-radius: 4px;
   border: none;
   cursor: pointer;
+  width: fit-content;
 }
 
 button.btn a {
@@ -194,6 +195,16 @@ img.project-home {
   width: 100%;
   overflow: hidden;
   height: 500px;  
+}
+
+/* Mini section navigation entre les pages */
+
+.pagesNav {
+  padding: 20px;
+}
+
+.pagesNav > a:hover {
+color: #67a878;
 }
 
 /* Page projets */
@@ -253,6 +264,15 @@ div.right-container img {
   object-fit: cover;
 }
 
+/* Image lors de la modification d'article */
+
+.singleImg {
+  width: -webkit-fill-available;
+}
+/* Page administration */
+.adminContent {
+  height: 70vh;
+}
 /* Menu user  */
 
 span.hello-user {

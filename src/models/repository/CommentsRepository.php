@@ -3,14 +3,8 @@ namespace Models\Repository;
 use Models\Entity\Comment;
 use PDO;
 
-class CommentsRepository
+class CommentsRepository extends Repository
 {
-    private PDO $mysqlClient;
-    public function __construct() 
-    {
-        $this->mysqlClient = new PDO('mysql:host=localhost;dbname=blog-php;charset=utf8', 'root', '', [PDO::ATTR_ERRMODE=>PDO::ERRMODE_EXCEPTION]);
-    }
-
     public function addComment(Comment $comment){
         $sql = 'INSERT INTO comment (content, statut, delete_comment, id_article, id_user)
             VALUES (:content, NULL, 0, :id_article, :id_user)';

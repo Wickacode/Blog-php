@@ -10,11 +10,14 @@ use Models\Repository\CommentsRepository;
 class ArticlesController extends Controller
 {
     private ArticlesRepository $articleRepository;
-    public function __construct() {
-        $this->articleRepository= new ArticlesRepository();
+    private CommentsRepository $commentRepository;
+    public function __construct()
+    {
+        $this->articleRepository = new ArticlesRepository();
+        $this->commentRepository = new CommentsRepository();
+
     }
 
-    //Déclaration de la propriété privée 
     public function listArticles()
     {
         $articles = $this->articleRepository->getArticles();
@@ -30,8 +33,8 @@ class ArticlesController extends Controller
                 echo $this->render('error404.html.twig');
                 return;
             }
-            $repositoryComments = new CommentsRepository();
-            $comments = $repositoryComments->getComments($id);
+
+            $comments = $this->commentRepository->getComments($id);
             echo $this->render('article.html.twig', ["article" => $article, "comments" => $comments]);
         } else {
             echo $this->render('error404.html.twig');
@@ -88,7 +91,7 @@ class ArticlesController extends Controller
         if (!empty($_GET['id_article'])) {
             $idArticle = $_GET['id_article'];
             $this->articleRepository->publishArticleSQL($idArticle);
-            return header(': http://localhost/BLOG-PHP/public/index.php?action=getListArticles');
+            return header('location:index.php?action=getListArticles');
 
         } else {
             echo $this->render('error404.html.twig');
@@ -147,8 +150,7 @@ class ArticlesController extends Controller
     {
         if (!empty($_GET['id_article'])) {
             $idArticle = $_GET['id_article'];
-            $repositoryComment = new CommentsRepository();
-            $repositoryComment->removeCom($idArticle);
+            $this->commentRepository->removeCom($idArticle);
             $this->articleRepository->removeArticle($idArticle);
             $articlesPublish = $this->articleRepository->getArticlesPublishAdmin();
             $articlesNoPublish = $this->articleRepository->getArticlesNoPublishAdmin();
@@ -169,9 +171,7 @@ class ArticlesController extends Controller
                     "id_article" => (int) $_GET["id_article"]
                 ]);
 
-                $repositoryComment = new CommentsRepository();
-                $repositoryComment->addComment($comment);
-                $validAddComment = "Le commentaire est en cours de validation";
+                $this->commentRepository->addComment($comment);
                 return header('location: http://localhost/BLOG-PHP/public/index.php?action=article&id_article=' . $_GET["id_article"]);
 
             } else {
@@ -182,8 +182,7 @@ class ArticlesController extends Controller
     }
     public function listComments()
     {
-        $commentsRepository = new CommentsRepository();
-        $comments = $commentsRepository->listComments();
+        $comments = $this->commentRepository->listComments();
 
         echo $this->render('listComments.html.twig', ["comments" => $comments]);
     }
@@ -191,16 +190,15 @@ class ArticlesController extends Controller
     public function approveCom()
     {
         $idCom = $_GET["id_comment"];
-        $commentsRepository = new CommentsRepository();
-        $commentsRepository->validCom($idCom);
+        $this->commentRepository->validCom($idCom);
         return header('location: http://localhost/BLOG-PHP/public/index.php?action=listComments');
     }
 
     public function deleteCom()
     {
+        //
         $idCom = $_GET["id_comment"];
-        $commentsRepository = new CommentsRepository();
-        $commentsRepository->refuseCom($idCom);
+        $this->commentRepository->refuseCom($idCom);
         return header('location: http://localhost/BLOG-PHP/public/index.php?action=listComments');
 
     }
