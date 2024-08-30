@@ -20,8 +20,9 @@ class CommentsRepository extends Repository
 
     public function getComments($id): array
     {
-        $sql = "SELECT * FROM comment AS c,user AS u  WHERE c.id_user = u.id_user AND id_article = $id AND statut = 1";
+        $sql = "SELECT * FROM comment AS c,user AS u  WHERE c.id_user = u.id_user AND id_article = :id_article AND statut = 1";
         $query = $this->mysqlClient->prepare($sql);
+        $query->bindValue(':id_article', $id, PDO::PARAM_INT);
         $query->execute();
         $dataComments = $query->fetchAll();
         $comments = [];
