@@ -18,13 +18,13 @@ class ArticlesController extends Controller
 
     }
 
-    public function listArticles()
+    public function listArticles():void
     {
         $articles = $this->articleRepository->getArticles();
         echo $this->render('portfolio.html.twig', ["articles" => $articles]);
     }
 
-    public function Article()
+    public function Article():void
     {
         if (!empty($_GET['id_article'])) {
             $id = $_GET["id_article"];
@@ -41,7 +41,7 @@ class ArticlesController extends Controller
         }
     }
 
-    public function createArticle()
+    public function createArticle():void
     {
         $date = date('Y-m-d');
         //Gestion de la récupération et de la sauvegarde des données 
@@ -78,7 +78,7 @@ class ArticlesController extends Controller
 
     }
 
-    public function getListArticles()
+    public function getListArticles():void
     {
         $articlesPublish = $this->articleRepository->getArticlesPublishAdmin();
         $articlesNoPublish = $this->articleRepository->getArticlesNoPublishAdmin();
@@ -86,19 +86,19 @@ class ArticlesController extends Controller
         echo $this->render('listArticles.html.twig', ["articlesPublish" => $articlesPublish, "articlesNoPublish" => $articlesNoPublish]);
     }
 
-    public function publishAdminArticle()
+    public function publishAdminArticle():void
     {
         if (!empty($_GET['id_article'])) {
             $idArticle = $_GET['id_article'];
             $this->articleRepository->publishArticleSQL($idArticle);
-            return header('location:index.php?action=getListArticles');
+            header('location:index.php?action=getListArticles');
 
         } else {
             echo $this->render('error404.html.twig');
         }
     }
 
-    public function formUpdateArticle()
+    public function formUpdateArticle():void
     {
         if (!empty($_GET['id_article'])) {
             $idArticle = $_GET['id_article'];
@@ -110,7 +110,7 @@ class ArticlesController extends Controller
         }
     }
 
-    public function updateArticle()
+    public function updateArticle():void
     {
         $date = date('Y-m-d');
         if (isset($_POST['modifyArticle'])) {
@@ -146,7 +146,7 @@ class ArticlesController extends Controller
         }
     }
 
-    public function deleteArticle()
+    public function deleteArticle():void
     {
         if (!empty($_GET['id_article'])) {
             $idArticle = $_GET['id_article'];
@@ -161,7 +161,7 @@ class ArticlesController extends Controller
     }
 
 
-    public function createComment()
+    public function createComment():void
     {
         if (isset($_POST['submitComment'])) {
             if (!empty($_POST['message'])) {
@@ -172,7 +172,7 @@ class ArticlesController extends Controller
                 ]);
 
                 $this->commentRepository->addComment($comment);
-                return header('location: http://localhost/BLOG-PHP/public/index.php?action=article&id_article=' . $_GET["id_article"]);
+                header('location: http://localhost/BLOG-PHP/public/index.php?action=article&id_article=' . $_GET["id_article"]);
 
             } else {
                 $error = "Tous les champs doivent être saisis";
@@ -180,26 +180,26 @@ class ArticlesController extends Controller
             }
         }
     }
-    public function listComments()
+    public function listComments():void
     {
         $comments = $this->commentRepository->listComments();
 
         echo $this->render('listComments.html.twig', ["comments" => $comments]);
     }
 
-    public function approveCom()
+    public function approveCom():void
     {
         $idCom = $_GET["id_comment"];
         $this->commentRepository->validCom($idCom);
-        return header('location: http://localhost/BLOG-PHP/public/index.php?action=listComments');
+        header('location: http://localhost/BLOG-PHP/public/index.php?action=listComments');
     }
 
-    public function deleteCom()
+    public function deleteCom():void
     {
         //
         $idCom = $_GET["id_comment"];
         $this->commentRepository->refuseCom($idCom);
-        return header('location: http://localhost/BLOG-PHP/public/index.php?action=listComments');
+        header('location: http://localhost/BLOG-PHP/public/index.php?action=listComments');
 
     }
 

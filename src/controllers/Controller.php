@@ -11,7 +11,7 @@ class Controller
     private $session;
     private $user;
 
-    public function render(string $view, array $data = [])
+    public function render(string $view, array $data = []):void
     {
         $loader = new FilesystemLoader(ROOT . '\src\views');
         $this->twig = new Environment(
@@ -39,7 +39,7 @@ class Controller
         }
     }
 
-    public function createSession(array $sessionDatas)
+    public function createSession(array $sessionDatas):array
     {
         $this->session["user"] = [
             'idUser' => $sessionDatas['id_user'],

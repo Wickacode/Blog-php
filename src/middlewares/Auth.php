@@ -11,7 +11,7 @@ class Auth
         }
     }
 
-    public function isAuth()
+    public function isAuth(): bool
     {
         return isset($_SESSION['user']);
 

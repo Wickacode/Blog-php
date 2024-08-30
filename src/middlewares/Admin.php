@@ -11,9 +11,9 @@ class Admin
         }
     }
 
-    public function isAdmin()
+    public function isAdmin(): bool
     {
-        return isset($_SESSION['user'])&&($_SESSION['user']['role'] == 1);
+        return isset($_SESSION['user']) && ($_SESSION['user']['role'] == 1);
 
     }
 }

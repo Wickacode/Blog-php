@@ -70,45 +70,45 @@ class Article
 
     //Setter
     //Assigne la valeur à l'attribut
-    public function setId_article(int $id)
+    public function setId_article(int $id): void
     {
         $this->id_article = $id;
     }
 
-    public function setTitle(string $title)
+    public function setTitle(string $title): void
     {
         $this->title = $title;
     }
 
-    public function setChapo(string $chapo)
+    public function setChapo(string $chapo): void
     {
         $this->chapo = $chapo;
     }
 
-    public function setContent(string $content)
+    public function setContent(string $content): void
     {
         $this->content = $content;
     }
 
-    public function setDate_publication(string $date_publication)
+    public function setDate_publication(string $date_publication): void
     {
         $this->date_publication = DateTime::createFromFormat('Y-m-d', $date_publication);
     }
 
-    public function setDate_modification(string $date_modification)
+    public function setDate_modification(string $date_modification): void
     {
         $this->date_modification = DateTime::createFromFormat('Y-m-d', $date_modification);
     }
-    public function setImage(string $image)
+    public function setImage(string $image): void
     {
         $this->image = $image;
     }
 
-    public function setAlt(string $alt)
+    public function setAlt(string $alt): void
     {
         $this->alt = $alt;
     }
-    public function setDelete(bool $delete_article)
+    public function setDelete(bool $delete_article): void
     {
         $this->delete_article = $delete_article;
     }

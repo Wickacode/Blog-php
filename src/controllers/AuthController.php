@@ -13,12 +13,12 @@ class AuthController extends Controller
         $this->usersRepository = new UsersRepository();
     }
 
-    public function registerView()
+    public function registerView():void
     {
         echo $this->render('register.html.twig');
 
     }
-    public function register()
+    public function register():void
     {
         //Gestion de la récupération et de la sauvegarde des données 
         if (isset($_POST['submitRegister'])) {
@@ -61,7 +61,7 @@ class AuthController extends Controller
         }
 
     }
-    public function loginUser()
+    public function loginUser():void
     {
         if (isset($_POST['submitLogin'])) {
             if (!empty($_POST['email']) && !empty($_POST['password'])) {
@@ -86,12 +86,12 @@ class AuthController extends Controller
         }
     }
 
-    public function login()
+    public function login():void
     {
         echo $this->render('login.html.twig');
     }
 
-    public function logout()
+    public function logout():void
     {
         unset($_SESSION['user']);
         echo $this->render('home.html.twig');

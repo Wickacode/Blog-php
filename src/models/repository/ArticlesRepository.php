@@ -7,7 +7,7 @@ use PDO;
 class ArticlesRepository extends Repository
 {
     // Récupère tous les articles publiés
-    public function getArticles()
+    public function getArticles(): array
     {
         $sql = 'SELECT * FROM article WHERE delete_article=1';
         $query = $this->mysqlClient->prepare($sql);
@@ -20,19 +20,19 @@ class ArticlesRepository extends Repository
         return $articles;
     }
     // Récupère un article spécifique basé sur son identifiant $id
-    public function getArticle($id)
+    public function getArticle($id): ?Article
     {
         $request = $this->mysqlClient->query("SELECT * FROM article WHERE id_article = '$id' ");
         $result = ($request->fetch());
-        if($result) {
-               $article = new Article($result);
-        return $article;
+        if ($result) {
+            $article = new Article($result);
+            return $article;
         }
 
         return null;
     }
     //  Ajoute un nouvel article dans la base de données
-    public function addArticle(Article $article)
+    public function addArticle(Article $article): void
     {
         $sql = 'INSERT INTO article (title, chapo, content, date_publication, date_modification, image, delete_article, alt, id_user)
             VALUES (:title, :chapo, :content, :date_publication, :date_modification, :image, 0,:alt, :id_user)';
@@ -51,7 +51,7 @@ class ArticlesRepository extends Repository
     }
 
     //Modifie un article existant identifié par $id_article
-    public function changeArticle($id_article, $article)
+    public function changeArticle($id_article, $article): void
     {
         $sql = 'UPDATE article SET title = :title, chapo = :chapo, content = :content, date_modification = :date_modification, image = :image, delete_article=0,alt = :alt WHERE id_article = :id_article';
         $query = $this->mysqlClient->prepare($sql);
@@ -62,11 +62,10 @@ class ArticlesRepository extends Repository
         $query->bindValue('image', $article->getImage(), PDO::PARAM_STR);
         $query->bindValue('alt', $article->getAlt(), PDO::PARAM_STR);
         $query->bindValue('id_article', $id_article, PDO::PARAM_INT);
-        $data = $query->execute();
-        return $data;
+        $query->execute();
     }
     //Récupère tous les articles publiés (delete_article = 1) pour l'administration
-    public function getArticlesPublishAdmin()
+    public function getArticlesPublishAdmin(): array
     {
         $sql = 'SELECT * FROM article WHERE delete_article = 1';
         $query = $this->mysqlClient->prepare($sql);
@@ -79,16 +78,15 @@ class ArticlesRepository extends Repository
         return $articles;
     }
     //Publie un article en définissant delete_article à 1 pour l'article identifié par $idArticle
-    public function publishArticleSQL($idArticle)
+    public function publishArticleSQL($idArticle): void
     {
         $sql = 'UPDATE article SET delete_article = 1 WHERE id_article = :id_article';
         $query = $this->mysqlClient->prepare($sql);
         $query->bindValue(':id_article', $idArticle, PDO::PARAM_INT);
-        $data = $query->execute(); 
-        return $data;
+        $query->execute();
     }
     //Récupère tous les articles non publiés (delete_article = 0) pour l'administration
-    public function getArticlesNoPublishAdmin()
+    public function getArticlesNoPublishAdmin(): array
     {
         $sql = 'SELECT * FROM article WHERE delete_article = 0';
         $query = $this->mysqlClient->prepare($sql);
@@ -101,13 +99,12 @@ class ArticlesRepository extends Repository
         return $articles;
     }
     //Supprime définitivement un article de la base de données basé sur son identifiant $idArticle
-    public function removeArticle($idArticle)
+    public function removeArticle($idArticle): void
     {
         $sql = "DELETE FROM article WHERE id_article = :id_article";
         $query = $this->mysqlClient->prepare($sql);
         $query->bindValue(':id_article', $idArticle, PDO::PARAM_INT);
-        $data = $query->execute();
-        return $data;
-        
+        $query->execute();
+
     }
 }
