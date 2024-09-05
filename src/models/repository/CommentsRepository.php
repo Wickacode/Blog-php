@@ -18,7 +18,7 @@ class CommentsRepository extends Repository
 
     }
 
-    public function getComments($id): array
+    public function getComments(int $id): array
     {
         $sql = "SELECT * FROM comment AS c,user AS u  WHERE c.id_user = u.id_user AND id_article = :id_article AND statut = 1";
         $query = $this->mysqlClient->prepare($sql);
@@ -44,7 +44,7 @@ class CommentsRepository extends Repository
         }
         return $comments;
     }
-    public function validCom($idCom): void
+    public function validCom(int $idCom): void
     {
         $sql = 'UPDATE comment SET statut = 1 WHERE id_comment = :id_comment';
         $query = $this->mysqlClient->prepare($sql);
@@ -52,7 +52,7 @@ class CommentsRepository extends Repository
         $query->execute();
     }
 
-    public function refuseCom($idCom): void
+    public function refuseCom(int $idCom): void
     {
         $sql = 'UPDATE comment SET statut = 0 WHERE id_comment = :id_comment';
         $query = $this->mysqlClient->prepare($sql);
@@ -60,7 +60,7 @@ class CommentsRepository extends Repository
         $query->execute();
     }
 
-    public function removeCom($idArticle): void
+    public function removeCom(int $idArticle): void
     {
         $sql = "DELETE FROM comment WHERE id_article = :id_article";
         $query = $this->mysqlClient->prepare($sql);

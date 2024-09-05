@@ -1,4 +1,8 @@
-@media (max-width: 800px) {
+@media (max-width: 768px) {
+
+  h2 {
+    text-align: center;
+  }
   .nav-container {
     padding: 20px 10px;
     justify-content: center;
@@ -8,27 +12,28 @@
     font-size: 1em;
   }
 
-  #home-intro div {
+  section#home-intro {
+    height: 50vh;
+  }
+
+  section#home-intro div {
     flex-direction: column;
   }
 
-  #home-intro-text {
+  section#home-intro-text {
     flex-direction: column;
     margin: 0;
   }
 
-  #home-intro-text div {
+  section#home-intro-text div {
     width: 100%;
+    padding: 40px;
   }
 
-  #home-intro-text p {
-    margin: 25px;
+  section#home-intro-text p {
+    margin: 10px;
   }
-}
 
-/* Format mobile */
-@media (max-width: 400px) {
-  /* Page d'accueil */
   #skills {
     height: auto;
   }
@@ -50,7 +55,7 @@
     width: 100%;
   }
 
-  #home-projects .left-section img.project-home{
+  #home-projects .left-section img.project-home {
     height: 400px;
   }
 

@@ -20,7 +20,7 @@ class ArticlesRepository extends Repository
         return $articles;
     }
     // Récupère un article spécifique basé sur son identifiant $id
-    public function getArticle($id): ?Article
+    public function getArticle(int $id): ?Article
     {
         $request = $this->mysqlClient->query("SELECT * FROM article WHERE id_article = '$id' ");
         $result = ($request->fetch());
@@ -51,7 +51,7 @@ class ArticlesRepository extends Repository
     }
 
     //Modifie un article existant identifié par $id_article
-    public function changeArticle($id_article, $article): void
+    public function changeArticle(int $id_article, Article $article): void
     {
         $sql = 'UPDATE article SET title = :title, chapo = :chapo, content = :content, date_modification = :date_modification, image = :image, delete_article=0,alt = :alt WHERE id_article = :id_article';
         $query = $this->mysqlClient->prepare($sql);
@@ -78,7 +78,7 @@ class ArticlesRepository extends Repository
         return $articles;
     }
     //Publie un article en définissant delete_article à 1 pour l'article identifié par $idArticle
-    public function publishArticleSQL($idArticle): void
+    public function publishArticleSQL(int $idArticle): void
     {
         $sql = 'UPDATE article SET delete_article = 1 WHERE id_article = :id_article';
         $query = $this->mysqlClient->prepare($sql);
@@ -99,7 +99,7 @@ class ArticlesRepository extends Repository
         return $articles;
     }
     //Supprime définitivement un article de la base de données basé sur son identifiant $idArticle
-    public function removeArticle($idArticle): void
+    public function removeArticle(int $idArticle): void
     {
         $sql = "DELETE FROM article WHERE id_article = :id_article";
         $query = $this->mysqlClient->prepare($sql);

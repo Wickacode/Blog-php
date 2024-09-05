@@ -5,7 +5,7 @@ use PDO;
 
 class UsersRepository extends Repository
 {
-    public function addUser($user): void {
+    public function addUser(User $user): void {
         $sql = 'INSERT INTO user (firstname, lastname, email, pseudo, password , role )
         VALUES (:firstname, :lastname, :email, :pseudo, :password , 0)';
 
@@ -19,7 +19,7 @@ class UsersRepository extends Repository
         
     }
 
-    public function getUserByEmail($email): User{
+    public function getUserByEmail(string $email): User{
         $query = $this->mysqlClient->prepare("SELECT * FROM user WHERE email = :email");
         $query->bindValue('email', $email, PDO::PARAM_STR);
         $query->execute();
@@ -27,7 +27,7 @@ class UsersRepository extends Repository
         return new User($data);
     }
 
-    public function readUser($user) {
+    public function readUser(User $user) {
         $sql = 'SELECT * FROM user WHERE email = :email';
         $query = $this->mysqlClient->prepare($sql);
         $query->bindValue('email',$user->getEmail(), PDO::PARAM_STR);
@@ -36,7 +36,7 @@ class UsersRepository extends Repository
         return $dataUser;
     }
 
-    public function countMailPseudo($user): int {
+    public function countMailPseudo(User $user): int {
         $sql = ' SELECT COUNT(*) AS nbMailPseudo FROM user WHERE email = :email OR pseudo = :pseudo';
         $query = $this->mysqlClient->prepare($sql);
         $query->bindValue('email',$user->getEmail(), PDO::PARAM_STR);
