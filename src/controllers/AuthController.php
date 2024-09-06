@@ -38,7 +38,7 @@ class AuthController extends Controller
             }
             $verifMailPseudo = $this->usersRepository->countMailPseudo($user);
             $passwordLength = strlen($_POST['password']);
-            if ($verifMailPseudo['nbMailPseudo'] === '0') {
+            if ($verifMailPseudo == 0) {
                 if ($passwordLength >= 8) {
                     if ($_POST['password'] == $_POST['confirmPass']) {
                         $this->usersRepository->addUser($user);
@@ -67,11 +67,11 @@ class AuthController extends Controller
             if (!empty($_POST['email']) && !empty($_POST['password'])) {
                 $user = $this->usersRepository->getUserByEmail($_POST['email']);
 
-                if (isset($user)) {
-                    $dataUser = $this->usersRepository->readUser($user);
+                if ($user) {
+                    // $dataUser = $this->usersRepository->readUser($user);
 
                     if (password_verify($_POST['password'], $user->getPassword())) {
-                        $this->createSession($dataUser);
+                        $this->createSession($user);
                         echo $this->render('home.html.twig');
                     } else {
                         $error = "Le mot de passe est incorrect";

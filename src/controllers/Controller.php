@@ -1,6 +1,7 @@
 <?php
 namespace Controllers;
 
+use Models\Entity\User;
 use Twig\Environment;
 use Twig\Loader\FilesystemLoader;
 
@@ -39,15 +40,15 @@ class Controller
         }
     }
 
-    public function createSession(array $sessionDatas):array
+    public function createSession(User $user):array
     {
         $this->session["user"] = [
-            'idUser' => $sessionDatas['id_user'],
-            'firstname' => $sessionDatas['firstname'],
-            'lastname' => $sessionDatas['lastname'],
-            'pseudo' => $sessionDatas['pseudo'],
-            'email' => $sessionDatas['email'],
-            'role' => $sessionDatas['role']
+            'idUser' => $user->getId_user(),
+            'firstname' => $user->getFirstname(),
+            'lastname' => $user->getLastname(),
+            'pseudo' => $user->getPseudo(),
+            'email' => $user->getEmail(),
+            'role' => $user->getRole()
         ];
         $this->user = $this->session['user'];
         $_SESSION['user'] = $this->session['user'];

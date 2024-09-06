@@ -19,22 +19,24 @@ class UsersRepository extends Repository
         
     }
 
-    public function getUserByEmail(string $email): User{
+    public function getUserByEmail(string $email): ?User{
         $query = $this->mysqlClient->prepare("SELECT * FROM user WHERE email = :email");
         $query->bindValue('email', $email, PDO::PARAM_STR);
         $query->execute();
         $data = $query->fetch();
-        return new User($data);
+        if($data) {
+            return new User($data);
+        } return null;
     }
 
-    public function readUser(User $user) {
-        $sql = 'SELECT * FROM user WHERE email = :email';
-        $query = $this->mysqlClient->prepare($sql);
-        $query->bindValue('email',$user->getEmail(), PDO::PARAM_STR);
-        $query->execute();
-        $dataUser = $query->fetch(PDO::FETCH_ASSOC);
-        return $dataUser;
-    }
+    // public function readUser(User $user) {
+    //     $sql = 'SELECT * FROM user WHERE email = :email';
+    //     $query = $this->mysqlClient->prepare($sql);
+    //     $query->bindValue('email',$user->getEmail(), PDO::PARAM_STR);
+    //     $query->execute();
+    //     $dataUser = $query->fetch(PDO::FETCH_ASSOC);
+    //     return $dataUser;
+    // }
 
     public function countMailPseudo(User $user): int {
         $sql = ' SELECT COUNT(*) AS nbMailPseudo FROM user WHERE email = :email OR pseudo = :pseudo';
@@ -42,7 +44,7 @@ class UsersRepository extends Repository
         $query->bindValue('email',$user->getEmail(), PDO::PARAM_STR);
         $query->bindValue('pseudo',$user->getPseudo(), PDO::PARAM_STR);
         $query->execute();
-        $dataCount = $query->fetch(PDO::FETCH_ASSOC);
-        return $dataCount;
+        $dataCount = $query->fetch();
+        return $dataCount["nbMailPseudo"];
     }
 }
