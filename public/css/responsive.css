@@ -1,5 +1,7 @@
 @media (max-width: 768px) {
-
+ .body-width {
+  width: 100%;
+ }
   h2 {
     text-align: center;
   }
@@ -84,6 +86,7 @@
   div.right-container {
     width: 90%;
     margin: 10px 0;
+    height: 350px ;
   }
 
   /* Page Contact */
@@ -101,6 +104,11 @@
   /* Gestion articles */
   div.gestionComment {
     flex-direction: column;
+  }
+
+  /* Gestion Comments */
+  div.gestionComment {
+    margin: 20px 0;
   }
   
 }

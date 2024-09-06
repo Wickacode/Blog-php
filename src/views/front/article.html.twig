@@ -14,9 +14,9 @@
                     <label for="message">Message :</label>
                     <textarea type="text" id="message" name="message" required rows="10" cols="50"></textarea>
 
-                    <button name="submitComment" type="submit" class="btn dark bg-light-blue">Ajouter commentaire</button>
+                    <button name="submitComment" type="submit" class="btnSubmitComment btn dark bg-light-blue">Ajouter commentaire</button>
                 </form> 
-
+                
                  {% for comment in comments %}
                     <div class="comment">
                         <p class="text-justify">{{ comment.content }}</p>

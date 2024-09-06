@@ -160,6 +160,10 @@ button.btn a {
   background-color: #142d4c;
 }
 
+button.btnSubmitComment {
+  margin-bottom: 20px;
+}
+
 /* Barre de navigation */
 .nav-container {
 background: var(--dark);  
