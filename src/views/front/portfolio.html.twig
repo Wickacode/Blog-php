@@ -7,13 +7,10 @@
 
   {% for article in articles %} 
   <div class="project-container tac dfull gap fdc bg-dark light bxs">
-    <h2> {{article.title}} </h2>
+    <h2 class="wp-portfolio"> {{article.title}} </h2>
     <img src="{{article.image}}" alt="{{article.title}}" />
-    <div class="project-contain dfull fdc">
-      <h3>{{article.chapo}}</h3>
-      <p class="nbText">
-        {{article.content}}
-      </p>
+    <div class="project-contain dfull fdc wp-portfolio">
+      <h3 class="wp-portfolio">{{article.chapo}}</h3>
       <button class="btn dark bg-light-blue">
         <a href="index.php?action=article&id_article={{article.id_article}}">Voir plus</a>
       </button>
