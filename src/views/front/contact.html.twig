@@ -22,5 +22,13 @@
             <button type="submit" name="submitContact" class="btn dark bg-light-blue">Envoyer</button>
         </form>
     </div>
+
+    {% if error is defined %}
+            <br /><p>{{ error }}</p>
+    {% endif %}
+    {% if validInbox is defined %}
+            <br /><p>{{ validInbox}}</p>
+    {% endif %}
+
 </section>
 {% endblock %}
