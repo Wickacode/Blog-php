@@ -7,7 +7,6 @@ class Auth
     {
         if (!$this->isAuth()) {
             header('Location:index.php?action=login');
-            exit;
         }
     }
 
