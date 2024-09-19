@@ -58,4 +58,3 @@ CREATE TABLE Comment(
 	,CONSTRAINT Comment_Article_FK FOREIGN KEY (id_article) REFERENCES Article(id_article)
 	,CONSTRAINT Comment_User0_FK FOREIGN KEY (id_user) REFERENCES User(id_user)
 )ENGINE=InnoDB;
-

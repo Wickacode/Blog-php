@@ -68,8 +68,6 @@ class AuthController extends Controller
                 $user = $this->usersRepository->getUserByEmail($_POST['email']);
 
                 if ($user) {
-                    // $dataUser = $this->usersRepository->readUser($user);
-
                     if (password_verify($_POST['password'], $user->getPassword())) {
                         $this->createSession($user);
                         echo $this->render('home.html.twig');

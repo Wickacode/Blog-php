@@ -8,4 +8,4 @@ class UsersController extends Controller
     {
         echo $this->render('userManagement.html.twig');
     }
-} 
+}

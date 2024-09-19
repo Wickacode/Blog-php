@@ -105,6 +105,5 @@ class ArticlesRepository extends Repository
         $query = $this->mysqlClient->prepare($sql);
         $query->bindValue(':id_article', $idArticle, PDO::PARAM_INT);
         $query->execute();
-
     }
 }

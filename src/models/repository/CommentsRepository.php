@@ -15,7 +15,6 @@ class CommentsRepository extends Repository
         $query->bindValue('id_user', $comment->getIdUser(), PDO::PARAM_INT);
         $query->bindValue('id_article', $comment->getIdArticle(), PDO::PARAM_INT);
         $query->execute();
-
     }
 
     public function getComments(int $id): array
@@ -31,7 +30,6 @@ class CommentsRepository extends Repository
         }
         return $comments;
     }
-
     public function listComments(): array
     {
         $sql = "SELECT c.content, u.pseudo, a.title, c.id_comment FROM comment AS c,user AS u, article AS a WHERE a.id_article = c.id_article AND c.id_user = u.id_user AND statut IS NULL ";
@@ -44,6 +42,7 @@ class CommentsRepository extends Repository
         }
         return $comments;
     }
+
     public function validCom(int $idCom): void
     {
         $sql = 'UPDATE comment SET statut = 1 WHERE id_comment = :id_comment';

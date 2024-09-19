@@ -112,5 +112,4 @@ class Article
     {
         $this->delete_article = $delete_article;
     }
-
 }
