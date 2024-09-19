@@ -24,7 +24,7 @@ class Comment
 
 
     //Getter
-    public function getId_comment(): int
+    public function getIdComment(): int
     {
         return $this->id_comment;
     }
@@ -38,12 +38,12 @@ class Comment
         return $this->delete_comment;
     }
 
-    public function getId_user(): int
+    public function getIdUser(): int
     {
         return $this->id_user;
     }
 
-    public function getId_article(): int
+    public function getIdArticle(): int
     {
         return $this->id_article;
     }
@@ -60,7 +60,7 @@ class Comment
 
     //Setter
     //Assigne la valeur à l'attribut
-    public function setId_comment(int $id_comment): void
+    public function setIdComment(int $id_comment): void
     {
         $this->id_comment = $id_comment;
     }
@@ -75,12 +75,12 @@ class Comment
         $this->delete_comment = $delete_comment;
     }
 
-    public function setId_user(int $id_user): void
+    public function setIdUser(int $id_user): void
     {
         $this->id_user = $id_user;
     }
 
-    public function setId_article(int $id_article): void
+    public function setIdArticle(int $id_article): void
     {
         $this->id_article = $id_article;
     }

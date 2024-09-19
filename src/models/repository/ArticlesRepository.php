@@ -41,8 +41,8 @@ class ArticlesRepository extends Repository
         $query->bindValue('title', $article->getTitle(), PDO::PARAM_STR);
         $query->bindValue('chapo', $article->getChapo(), PDO::PARAM_STR);
         $query->bindValue('content', $article->getContent(), PDO::PARAM_STR);
-        $query->bindValue('date_publication', $article->getDate_publication()->format('Y-m-d'), PDO::PARAM_STR);
-        $query->bindValue('date_modification', $article->getDate_modification()->format('Y-m-d'), PDO::PARAM_STR);
+        $query->bindValue('date_publication', $article->getDatePublication()->format('Y-m-d'), PDO::PARAM_STR);
+        $query->bindValue('date_modification', $article->getDateModification()->format('Y-m-d'), PDO::PARAM_STR);
         $query->bindValue('image', $article->getImage(), PDO::PARAM_STR);
         $query->bindValue('alt', $article->getAlt(), PDO::PARAM_STR);
         $query->bindValue('id_user', 1, PDO::PARAM_INT);
@@ -58,7 +58,7 @@ class ArticlesRepository extends Repository
         $query->bindValue('title', $article->getTitle(), PDO::PARAM_STR);
         $query->bindValue('chapo', $article->getChapo(), PDO::PARAM_STR);
         $query->bindValue('content', $article->getContent(), PDO::PARAM_STR);
-        $query->bindValue('date_modification', $article->getDate_modification()->format('Y-m-d'), PDO::PARAM_STR);
+        $query->bindValue('date_modification', $article->getDateModification()->format('Y-m-d'), PDO::PARAM_STR);
         $query->bindValue('image', $article->getImage(), PDO::PARAM_STR);
         $query->bindValue('alt', $article->getAlt(), PDO::PARAM_STR);
         $query->bindValue('id_article', $id_article, PDO::PARAM_INT);

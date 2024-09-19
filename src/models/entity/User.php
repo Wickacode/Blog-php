@@ -23,7 +23,7 @@ class User
         }
     }
 
-    public function getId_user(): int
+    public function getIdUser(): int
     {
         return $this->id_user;
     }
@@ -55,7 +55,7 @@ class User
 
     //Setter
     //Assigne la valeur à l'attribut
-    public function setId_user(int $id): void
+    public function setIdUser(int $id): void
     {
         $this->id_user = $id;
     }

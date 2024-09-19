@@ -43,7 +43,7 @@ class Controller
     public function createSession(User $user):array
     {
         $this->session["user"] = [
-            'idUser' => $user->getId_user(),
+            'idUser' => $user->getIdUser(),
             'firstname' => $user->getFirstname(),
             'lastname' => $user->getLastname(),
             'pseudo' => $user->getPseudo(),
