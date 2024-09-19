@@ -24,7 +24,7 @@ class ArticlesController extends Controller
         echo $this->render('portfolio.html.twig', ["articles" => $articles]);
     }
 
-    public function Article():void
+    public function article():void
     {
         if (!empty($_GET['id_article'])) {
             $id = $_GET["id_article"];
