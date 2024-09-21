@@ -15,6 +15,7 @@ class ArticlesRepository extends Repository
         $dataArticles = $query->fetchAll();
         $articles = [];
         foreach ($dataArticles as $article) {
+            var_dump($article);
             $articles[] = new Article($article);
         }
         return $articles;

@@ -12,10 +12,10 @@
     <div class="project-contain dfull fdc wp-portfolio">
       <h3 class="wp-portfolio">{{article.chapo}}</h3>
       <button class="btn dark bg-light-blue">
-        <a href="index.php?action=article&id_article={{article.id_article}}">Voir plus</a>
+        <a href="index.php?action=article&id_article={{article.idArticle}}">Voir plus</a>
       </button>
       {% if session.role == 1  %}
-      <a href="index.php?action=formUpdateArticle&id_article={{article.id_article}}"> Modifier un article </a>
+      <a href="index.php?action=formUpdateArticle&id_article={{article.idArticle}}"> Modifier un article </a>
       {% endif %}
     </div>
   </div>

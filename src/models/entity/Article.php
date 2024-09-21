@@ -2,9 +2,11 @@
 namespace Models\Entity;
 
 use DateTime;
+use Utils\StringConverter;
 
 class Article
-{
+{ 
+    use StringConverter;
     private int $id_article;
     private string $title;
     private string $chapo;
@@ -20,7 +22,7 @@ class Article
     public function __construct(array $data)
     {
         foreach ($data as $key => $value) {
-            $method = "set" . ucfirst($key);
+            $method = "set" . ucfirst($this->camelise($key));
             if (method_exists($this, $method)) {
                 $this->$method($value);
             }

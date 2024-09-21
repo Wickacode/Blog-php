@@ -31,7 +31,7 @@ switch ($action) {
 
     case "article":
         $controller = new ArticlesController();
-        $controller->article();
+        $controller->Article();
         break;
 
     case "createArticle":

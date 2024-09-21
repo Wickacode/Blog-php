@@ -1,8 +1,11 @@
 <?php
 namespace Models\Entity;
+use Utils\StringConverter;
+
 
 class User
 {
+    use StringConverter;
     private int $id_user;
     private string $firstname;
     private string $lastname;
@@ -16,7 +19,7 @@ class User
     public function __construct(array $data)
     {
         foreach ($data as $key => $value) {
-            $method = "set" . ucfirst($key);
+            $method = "set" . ucfirst($this->camelise($key));
             if (method_exists($this, $method)) {
                 $this->$method($value);
             }

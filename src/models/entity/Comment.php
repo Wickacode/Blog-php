@@ -1,7 +1,10 @@
 <?php
 namespace Models\Entity;
+use Utils\StringConverter;
+
 class Comment
 {
+    use StringConverter;
     private int $id_comment;
     private string $content;
     private bool $delete_comment;
@@ -15,7 +18,7 @@ class Comment
     public function __construct(array $data)
     {
         foreach ($data as $key => $value) {
-            $method = "set" . ucfirst($key);
+            $method = "set" . ucfirst($this->camelise($key));
             if (method_exists($this, $method)) {
                 $this->$method($value);
             }
