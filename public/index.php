@@ -94,6 +94,11 @@ switch ($action) {
         $controller->deleteCom();
         break;
 
+    case "pageContact":
+        $controller = new ContactController();
+        $controller->pageContact();
+        break;
+
     case "contact":
         $controller = new ContactController();
         $controller->contact();

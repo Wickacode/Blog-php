@@ -21,7 +21,6 @@ class ArticlesController extends Controller
     public function listArticles():void
     {
         $articles = $this->articleRepository->getArticles();
-        var_dump($articles);
         echo $this->render('portfolio.html.twig', ["articles" => $articles]);
     }
 
@@ -29,7 +28,6 @@ class ArticlesController extends Controller
     {
         if (!empty($_GET['id_article'])) {
             $id = $_GET["id_article"];
-            var_dump(value: $id);
             $article = $this->articleRepository->getArticle($id);
             if (!$article) {
                 echo $this->render('error404.html.twig');
@@ -198,11 +196,9 @@ class ArticlesController extends Controller
 
     public function deleteCom():void
     {
-        //
         $idCom = $_GET["id_comment"];
         $this->commentRepository->refuseCom($idCom);
         header('location: http://localhost/BLOG-PHP/public/index.php?action=listComments');
-
     }
 
 }
