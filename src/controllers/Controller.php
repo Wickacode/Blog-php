@@ -14,7 +14,7 @@ class Controller
 
     public function render(string $view, array $data = []):void
     {
-        $loader = new FilesystemLoader(ROOT . '\src\views');
+        $loader = new FilesystemLoader(dirname(__DIR__) . '/views');
         $this->twig = new Environment(
             $loader,
             [
@@ -33,7 +33,7 @@ class Controller
 
         define('view', $view);
 
-        if (file_exists(ROOT . "/src/views/front/" . $view)) {
+        if (file_exists(dirname(__DIR__) . "/views/front/" . $view)) {
             echo $this->twig->render('front/' . $view, $data);
         } else {
             echo $this->twig->render('back/' . $view, $data);
