@@ -18,30 +18,30 @@ class ArticlesController extends Controller
 
     }
 
-    public function listArticles():void
+    public function listArticles(): void
     {
         $articles = $this->articleRepository->getArticles();
-        echo $this->render('portfolio.html.twig', ["articles" => $articles]);
+        $this->render('portfolio.html.twig', ["articles" => $articles]);
     }
 
-    public function Article():void
+    public function Article(): void
     {
         if (!empty($_GET['id_article'])) {
             $id = $_GET["id_article"];
             $article = $this->articleRepository->getArticle($id);
             if (!$article) {
-                echo $this->render('error404.html.twig');
+                $this->render('error404.html.twig');
                 return;
             }
 
             $comments = $this->commentRepository->getComments($id);
-            echo $this->render('article.html.twig', ["article" => $article, "comments" => $comments]);
+            $this->render('article.html.twig', ["article" => $article, "comments" => $comments]);
         } else {
-            echo $this->render('error404.html.twig');
+            $this->render('error404.html.twig');
         }
     }
 
-    public function createArticle():void
+    public function createArticle(): void
     {
         $date = date('Y-m-d');
         //Gestion de la récupération et de la sauvegarde des données 
@@ -67,26 +67,26 @@ class ArticlesController extends Controller
                 $validAdd = "L'article a bien été ajouté";
             } else {
                 $error = "Tous les champs doivent être saisis";
-                echo $this->render('createArticle.html.twig', ["error" => $error]);
+                $this->render('createArticle.html.twig', ["error" => $error]);
             }
         }
         if (isset($validAdd)) {
-            echo $this->render('createArticle.html.twig', ["validAdd" => $validAdd]);
+            $this->render('createArticle.html.twig', ["validAdd" => $validAdd]);
         } else {
-            echo $this->render('createArticle.html.twig');
+            $this->render('createArticle.html.twig');
         }
 
     }
 
-    public function getListArticles():void
+    public function getListArticles(): void
     {
         $articlesPublish = $this->articleRepository->getArticlesPublishAdmin();
         $articlesNoPublish = $this->articleRepository->getArticlesNoPublishAdmin();
 
-        echo $this->render('listArticles.html.twig', ["articlesPublish" => $articlesPublish, "articlesNoPublish" => $articlesNoPublish]);
+        $this->render('listArticles.html.twig', ["articlesPublish" => $articlesPublish, "articlesNoPublish" => $articlesNoPublish]);
     }
 
-    public function publishAdminArticle():void
+    public function publishAdminArticle(): void
     {
         if (!empty($_GET['id_article'])) {
             $idArticle = $_GET['id_article'];
@@ -94,23 +94,23 @@ class ArticlesController extends Controller
             header('location:index.php?action=getListArticles');
 
         } else {
-            echo $this->render('error404.html.twig');
+            $this->render('error404.html.twig');
         }
     }
 
-    public function formUpdateArticle():void
+    public function formUpdateArticle(): void
     {
         if (!empty($_GET['id_article'])) {
             $idArticle = $_GET['id_article'];
             $article = $this->articleRepository->getArticle($idArticle);
-            echo $this->render('updateArticle.html.twig', ["article" => $article]);
+            $this->render('updateArticle.html.twig', ["article" => $article]);
 
         } else {
-            echo $this->render('error404.html.twig');
+            $this->render('error404.html.twig');
         }
     }
 
-    public function updateArticle():void
+    public function updateArticle(): void
     {
         $date = date('Y-m-d');
         if (isset($_POST['modifyArticle'])) {
@@ -140,13 +140,13 @@ class ArticlesController extends Controller
                 $this->articleRepository->changeArticle($idArticle, $article);
                 $articlesPublish = $this->articleRepository->getArticlesPublishAdmin();
                 $articlesNoPublish = $this->articleRepository->getArticlesNoPublishAdmin();
-                echo $this->render('listArticles.html.twig', ["articlesPublish" => $articlesPublish, "articlesNoPublish" => $articlesNoPublish]);
+                $this->render('listArticles.html.twig', ["articlesPublish" => $articlesPublish, "articlesNoPublish" => $articlesNoPublish]);
 
             }
         }
     }
 
-    public function deleteArticle():void
+    public function deleteArticle(): void
     {
         if (!empty($_GET['id_article'])) {
             $idArticle = $_GET['id_article'];
@@ -154,14 +154,14 @@ class ArticlesController extends Controller
             $this->articleRepository->removeArticle($idArticle);
             $articlesPublish = $this->articleRepository->getArticlesPublishAdmin();
             $articlesNoPublish = $this->articleRepository->getArticlesNoPublishAdmin();
-            echo $this->render('listArticles.html.twig', ["articlesPublish" => $articlesPublish, "articlesNoPublish" => $articlesNoPublish]);
+            $this->render('listArticles.html.twig', ["articlesPublish" => $articlesPublish, "articlesNoPublish" => $articlesNoPublish]);
         } else {
-            echo $this->render('error404.html.twig');
+            $this->render('error404.html.twig');
         }
     }
 
 
-    public function createComment():void
+    public function createComment(): void
     {
         if (isset($_POST['submitComment'])) {
             if (!empty($_POST['message'])) {
@@ -176,25 +176,25 @@ class ArticlesController extends Controller
 
             } else {
                 $error = "Tous les champs doivent être saisis";
-                echo $this->render('createArticle.html.twig', ["error" => $error]);
+                $this->render('createArticle.html.twig', ["error" => $error]);
             }
         }
     }
-    public function listComments():void
+    public function listComments(): void
     {
         $comments = $this->commentRepository->listComments();
 
-        echo $this->render('listComments.html.twig', ["comments" => $comments]);
+        $this->render('listComments.html.twig', ["comments" => $comments]);
     }
 
-    public function approveCom():void
+    public function approveCom(): void
     {
         $idCom = $_GET["id_comment"];
-        $this->commentRepository->validCom((int)$idCom);
+        $this->commentRepository->validCom((int) $idCom);
         header('location: http://localhost/BLOG-PHP/public/index.php?action=listComments');
     }
 
-    public function deleteCom():void
+    public function deleteCom(): void
     {
         $idCom = $_GET["id_comment"];
         $this->commentRepository->refuseCom($idCom);

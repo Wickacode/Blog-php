@@ -6,7 +6,7 @@ class ContactController extends Controller
 {
     public function pageContact(): void
     {
-        echo $this->render('contact.html.twig');
+        $this->render('contact.html.twig');
     }
 
     public function contact()
@@ -21,11 +21,12 @@ class ContactController extends Controller
                 $entetes .= "Cc:" . $dest;
                 $entetes .= "Content-Type: text/html; charset=iso-8859-1";
 
-                if (mail($dest, $objet, $message, $entetes)) {                    $validInbox = "Mail envoyé avec succès.";
-                    echo $this->render('contact.html.twig', ["validInbox" => $validInbox]);
+                if (mail($dest, $objet, $message, $entetes)) {
+                    $validInbox = "Mail envoyé avec succès.";
+                    $this->render('contact.html.twig', ["validInbox" => $validInbox]);
                 } else {
                     $error = "Un problème est survenu.";
-                    echo $this->render('contact.html.twig', ["error" => $error]);
+                    $this->render('contact.html.twig', ["error" => $error]);
                 }
 
             }
