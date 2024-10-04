@@ -9,7 +9,7 @@ class ContactController extends Controller
         $this->render('contact.html.twig');
     }
 
-    public function contact()
+    public function contact(): void
     {
         if (isset($_POST['submitContact'])) {
             if (!empty($_POST['email']) && !empty($_POST['message']) && !empty($_POST['objet'])) {
