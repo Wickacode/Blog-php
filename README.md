@@ -24,8 +24,8 @@ Ce projet consiste en la création d'un blog professionnel à l'aide de PHP et S
 `composer install`
 
 - **Créez la base de données :**
-
-  - **Importez le fichier bdd.sql qui se trouve à la racine du projet.**
+  -  **Créez une nouvelle BDD dans votre SGBD, nommez-la blog-php**
+  - **Importez le fichier bdd.sql qui se trouve à la racine du projet dans cette base de données.**
 Cela configurera la structure de la BDD et ajoutera des données fictives (comptes administrateurs, utilisateurs, articles, commentaires).
   - **Configurez la base de données :**
 Mettez à jour le fichier repository.php dans le dossier Repository avec vos informations d'accès à la base de données.
