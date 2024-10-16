@@ -94,14 +94,25 @@ margin: 30px 0;
   padding: 100px 0;
 }
 
+.menu-user li a {
+  margin-right: 20px;
+}
+
 /* Formulaires */
 .form-container {
   margin-bottom: 50px !important ;
 }
 
+#form-page {
+  height: 80vh;
+}
 .form-text {
   width: 80%;
   text-align: center;
+}
+
+.contact-form {
+  margin-right: 20px;
 }
 
 /* Tailles */
@@ -238,7 +249,7 @@ img.project-home {
 
 /* Mini section navigation entre les pages */
 
-.pagesNav {
+.pagesNav a {
   padding: 20px;
 }
 
