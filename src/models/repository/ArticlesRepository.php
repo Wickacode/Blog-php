@@ -22,8 +22,12 @@ class ArticlesRepository extends Repository
     // Récupère un article spécifique basé sur son identifiant $id
     public function getArticle(int $id): ?Article
     {
-        $request = $this->mysqlClient->query("SELECT * FROM article WHERE id_article = '$id' ");
-        $result = ($request->fetch());
+        $sql = "SELECT * FROM article WHERE id_article = :id_article";
+        $query = $this->mysqlClient->prepare($sql);
+        $query->bindValue(':id_article', $id, PDO::PARAM_INT);
+        $query->execute();
+        $result = $query->fetch();
+
         if ($result) {
             $article = new Article($result);
             return $article;

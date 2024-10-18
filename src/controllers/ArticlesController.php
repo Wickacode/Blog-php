@@ -27,7 +27,7 @@ class ArticlesController extends Controller
     public function article(): void
     {
         if (!empty($_GET['id_article'])) {
-            $id = $_GET["id_article"];
+            $id =$_GET["id_article"];
             $article = $this->articleRepository->getArticle($id);
             if (!$article) {
                 $this->render('error404.html.twig');
@@ -48,10 +48,16 @@ class ArticlesController extends Controller
         if (isset($_POST['submitArticle'])) {
             if (isset($_FILES["uploadfile"]["name"]) && !empty($_FILES["uploadfile"]["name"])) {
                 $filename = $_FILES["uploadfile"]["name"];
-                $folder = "C:/wamp64/www/Blog-php/public/img/upload/" . $filename;
-                if (move_uploaded_file($_FILES["uploadfile"]["tmp_name"], $folder))
-                    ;
-                $stockImg = "http://localhost/BLOG-PHP/public/img/upload/" . $filename;
+                $uploadDir = __DIR__ . "/../../public/img/upload/";
+                
+                $destinationPath = $uploadDir . $filename;
+                if (move_uploaded_file($_FILES["uploadfile"]["tmp_name"], $destinationPath)) {
+                    $stockImg = $filename;
+                } else {
+                    $error = "Erreur lors du téléchargement de l'image.";
+                    $this->render('createArticle.html.twig', ["error" => $error]);
+                    return; 
+                }
             }
             if (!empty($_POST['title']) && !empty($_POST['chapo']) && !empty($_POST['content']) && !empty($_POST['altImage'])) {
                 $article = new Article([
@@ -63,6 +69,7 @@ class ArticlesController extends Controller
                     "image" => $stockImg,
                     "alt" => $_POST['altImage']
                 ]);
+                // $article->setTitle($postClean['title']);
                 $this->articleRepository->addArticle($article);
                 $validAdd = "L'article a bien été ajouté";
             } else {
@@ -116,10 +123,15 @@ class ArticlesController extends Controller
         if (isset($_POST['modifyArticle'])) {
             if (isset($_FILES["uploadfile"]["name"]) && !empty($_FILES["uploadfile"]["name"])) {
                 $filename = $_FILES["uploadfile"]["name"];
-                $folder = "C:/wamp64/www/Blog-php/public/img/upload/" . $filename;
-                if (move_uploaded_file($_FILES["uploadfile"]["tmp_name"], $folder))
-                    ;
-                $stockImg = "http://localhost/BLOG-PHP/public/img/upload/" . $filename;
+                $uploadDir = __DIR__ . "/../../public/img/upload/";
+                $destinationPath = $uploadDir . $filename;
+                if (move_uploaded_file($_FILES["uploadfile"]["tmp_name"], $destinationPath)) {
+                    $stockImg = $filename;
+                } else {
+                    $error = "Erreur lors du téléchargement de l'image.";
+                    $this->render('updateArticle.html.twig', ["error" => $error]);
+                    return; 
+                }
             }
             if (!empty($_POST['title'] && !empty($_POST['chapo']) && !empty($_POST['content']) && !empty($_POST['altImage']))) {
                 $idArticle = $_GET['id_article'];
