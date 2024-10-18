@@ -13,12 +13,12 @@ class AuthController extends Controller
         $this->usersRepository = new UsersRepository();
     }
 
-    public function registerView():void
+    public function registerView(): void
     {
-        echo $this->render('register.html.twig');
+        $this->render('register.html.twig');
 
     }
-    public function register():void
+    public function register(): void
     {
         //Gestion de la récupération et de la sauvegarde des données 
         if (isset($_POST['submitRegister'])) {
@@ -34,7 +34,7 @@ class AuthController extends Controller
 
             } else {
                 $error = "Tous les champs doivent être saisis";
-                echo $this->render('register.html.twig', ["error" => $error]);
+                $this->render('register.html.twig', ["error" => $error]);
             }
             $verifMailPseudo = $this->usersRepository->countMailPseudo($user);
             $passwordLength = strlen($_POST['password']);
@@ -45,55 +45,53 @@ class AuthController extends Controller
                         $validAdd = "Votre compte a bien été crée, vous pouvez maintenant vous connecter";
                     } else {
                         $error = "Les mots de passe doivent être identiques.";
-                        echo $this->render('register.html.twig', ["error" => $error]);
+                        $this->render('register.html.twig', ["error" => $error]);
                     }
                 } else {
                     $error = "Le mot de passe doit contenir minimum 8 caractères.";
-                    echo $this->render('register.html.twig', ["error" => $error]);
+                    $this->render('register.html.twig', ["error" => $error]);
                 }
             } else {
                 $error = "L'adresse email ou le pseudo sont déjà pris";
-                echo $this->render('register.html.twig', ["error" => $error]);
+                $this->render('register.html.twig', ["error" => $error]);
             }
         }
         if (isset($validAdd)) {
-            echo $this->render('login.html.twig', ["validAdd" => $validAdd]);
+            $this->render('login.html.twig', ["validAdd" => $validAdd]);
         }
 
     }
-    public function loginUser():void
+    public function loginUser(): void
     {
         if (isset($_POST['submitLogin'])) {
             if (!empty($_POST['email']) && !empty($_POST['password'])) {
                 $user = $this->usersRepository->getUserByEmail($_POST['email']);
 
                 if ($user) {
-                    // $dataUser = $this->usersRepository->readUser($user);
-
                     if (password_verify($_POST['password'], $user->getPassword())) {
                         $this->createSession($user);
-                        echo $this->render('home.html.twig');
+                        $this->render('home.html.twig');
                     } else {
                         $error = "Le mot de passe est incorrect";
-                        echo $this->render('login.html.twig', ["error" => $error]);
+                        $this->render('login.html.twig', ["error" => $error]);
                     }
 
                 } else {
                     $error = "Le mail est incorrect";
-                    echo $this->render('login.html.twig', ["error" => $error]);
+                    $this->render('login.html.twig', ["error" => $error]);
                 }
             }
         }
     }
 
-    public function login():void
+    public function login(): void
     {
-        echo $this->render('login.html.twig');
+        $this->render('login.html.twig');
     }
 
-    public function logout():void
+    public function logout(): void
     {
         unset($_SESSION['user']);
-        echo $this->render('home.html.twig');
+        $this->render('home.html.twig');
     }
 }

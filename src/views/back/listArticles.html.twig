@@ -15,21 +15,21 @@
             {% for articleNoPublish in articlesNoPublish %}
                 <div class="gestionComment dfull gap bxs">
                     <div class="com">
-                    <a href="index.php?action=article&id_article={{articleNoPublish.id_article}}">{{ articleNoPublish.title }}</a>
+                    <a href="index.php?action=article&id_article={{articleNoPublish.idArticle}}">{{ articleNoPublish.title }}</a>
                         <p>
-                            Publié le: <b>"{{ articleNoPublish.date_publication | date('d-m-Y') }}"</b>
+                            Publié le: <b>"{{ articleNoPublish.datePublication | date('d-m-Y') }}"</b>
                         </p>
 
                         <p>
-                            Modifié le: <b>"{% if articleNoPublish.date_publication != articleNoPublish.date_modification %} {{ articleNoPublish.date_modification | date('d-m-Y') }} {% else %} {{ "---" }} {% endif %}"</b>
+                            Modifié le: <b>"{% if articleNoPublish.datePublication != articleNoPublish.dateModification %} {{ articleNoPublish.dateModification | date('d-m-Y') }} {% else %} {{ "---" }} {% endif %}"</b>
                         </p>
                     </div>
 
                     <div class="comChoice gap">
                     
-                        <a class="btn bg-green" href="index.php?action=formUpdateArticle&id_article={{articleNoPublish.id_article}}" id="formUpdateArticle">Modifier</a>
-                        <a class="btn bg-red" href="index.php?action=deleteArticle&id_article={{articleNoPublish.id_article}}" id="deleteArticle">Supprimer</a>   
-                        <a class="btn bg-red" href="index.php?action=publishArticle&id_article={{articleNoPublish.id_article}}" id="publishArticle">Publier</a>   
+                        <a class="btn bg-green" href="index.php?action=formUpdateArticle&id_article={{articleNoPublish.idArticle}}" id="formUpdateArticle">Modifier</a>
+                        <a class="btn bg-red" href="index.php?action=deleteArticle&id_article={{articleNoPublish.idArticle}}" id="deleteArticle">Supprimer</a>   
+                        <a class="btn bg-red" href="index.php?action=publishArticle&id_article={{articleNoPublish.idArticle}}" id="publishArticle">Publier</a>   
                         
                     </div>
                         
@@ -41,17 +41,17 @@
                     <div class="com">
                     <a href="index.php?action=article&id_article={.id_article}}">{{ articlePublish.title }}</a>
                         <p>
-                            Publié le: <b>"{{ articlePublish.date_publication | date('d-m-Y') }}"</b>
+                            Publié le: <b>"{{ articlePublish.datePublication | date('d-m-Y') }}"</b>
                         </p>
 
                         <p>
-                            Modifié le: <b>"{% if articlePublish.date_publication != articlePublish.date_modification %} {{ articlePublish.date_modification | date('d-m-Y') }} {% else %} {{ "---" }} {% endif %}"</b>
+                            Modifié le: <b>"{% if articlePublish.datePublication != articlePublish.dateModification %} {{ articlePublish.dateModification | date('d-m-Y') }} {% else %} {{ "---" }} {% endif %}"</b>
                         </p>
                     </div>
                    
                     <div class="comChoice gap">
-                        <a class="btn bg-green" href="index.php?action=formUpdateArticle&id_article={{articlePublish.id_article}}" id="formUpdateArticle">Modifier</a>
-                        <a class="btn bg-red" href="index.php?action=deleteArticle&id_article={{articlePublish.id_article}}" id="deleteArticle">Supprimer</a>   
+                        <a class="btn bg-green" href="index.php?action=formUpdateArticle&id_article={{articlePublish.idArticle}}" id="formUpdateArticle">Modifier</a>
+                        <a class="btn bg-red" href="index.php?action=deleteArticle&id_article={{articlePublish.idArticle}}" id="deleteArticle">Supprimer</a>   
                         
                     </div>
                         
@@ -62,4 +62,4 @@
         
     </section>
 
-{% endblock %}    
+{% endblock %}

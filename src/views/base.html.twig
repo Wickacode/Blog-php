@@ -28,20 +28,17 @@
       <ul class="light df">
         <li><a href="index.php">Accueil</a></li>
         <li><a href="index.php?action=articles">Projets</a></li>
-        <li><a href="index.php?action=contact">Contact</a></li>
+        <li><a href="index.php?action=pageContact">Contact</a></li>
       </ul>
     </div>
  
     {% if session is defined  %} 
     <div class="df">
     <span class="hello-user dfull wrap" >Bonjour {{ session.pseudo }} !</span> 
-        <ul class="menu-user">
-            <li><a href="index.php?action=userManagement">Gérer votre compte</a></li>
-                                    
+        <ul class="menu-user dfull">                                    
               {% if session.role == 1  %}
                   <li class="li-item"><a href="index.php?action=administration">Administration</a></li>
               {% endif %} 
-
             <li class="li-item"><a href="index.php?action=logout">Déconnexion</a></li>
         </ul>
       </div>
@@ -58,8 +55,44 @@
   {% block body %}
 
   {% endblock %}
-<footer class="footer-content h250 bg-light-blue">
-    <p class="body-width dfull pd20">&Copy; Jessica GARRIDO - 2024 - Tous droits réservés</p>
-</footer>
+<footer>
+			<!-- Logo -->
+			<div class="footer-logo">
+				<a href="/">
+					<img class="logo" src="img/jg-logo.png" alt="logo su site" />
+				</a>
+			</div>
+
+			<!-- Liens -->
+			<div class="footer-links">
+				<a href="index.php">Accueil</a>
+				<a href="index.php?action=login">Connexion</a>
+				<a href="index.php?action=registerView">Inscription</a>
+				<a href="index.php?action=pageContact">Contact</a>
+			</div>
+
+			<!-- Réseaux sociaux -->
+			<div class="footer-socials">
+				<a href="https://facebook.com" target="_blank" aria-label="Facebook">
+					<i class="fab fa-facebook-f"></i>
+				</a>
+				<a href="https://twitter.com" target="_blank" aria-label="Twitter">
+					<i class="fab fa-twitter"></i>
+				</a>
+				<a href="https://instagram.com" target="_blank" aria-label="Instagram">
+					<i class="fab fa-instagram"></i>
+				</a>
+				<a href="https://linkedin.com" target="_blank" aria-label="LinkedIn">
+					<i class="fab fa-linkedin-in"></i>
+				</a>
+			</div>
+
+			<!-- Mentions légales -->
+			<div class="footer-legal">
+				<p>&copy; 2024 Jessica Garrido. Tous droits réservés. |
+					<a href="index.php?action=legalsMentions">Mentions légales</a>
+				</p>
+			</div>
+		</footer>
   </body>
   </html>

@@ -1,6 +1,5 @@
 {
     "name": "info/digitale",
-    "version": "0.1.0",
     "description": "Projet 5 - Formation Développeur Symfony OpenClassrooms - Création d'un blog",
     "keywords": [
       "web",
@@ -13,7 +12,7 @@
       "license": "proprietary",
   
       "autoload": {
-          "psr-4": { "Models\\": "src/models", "Controllers\\": "src/controllers/","Middlewares\\":"src/middlewares"  },
+          "psr-4": { "Models\\": "src/models", "Controllers\\": "src/controllers/","Middlewares\\":"src/middlewares", "Utils\\":"src/utils" },
           "classmap": [ "src" ]
   
         },

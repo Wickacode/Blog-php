@@ -1,3 +1,10 @@
-{% extends 'base.html.twig' %} {% block body %}
-<h1>ERREUR 404 !!!!!!!!!!!!!!Cette page n'est pas trouvable</h1>
+{% extends 'base.html.twig' %} 
+{% block body %}
+ <div class="container-error-page">
+        <div class="error-message">
+            <h1>404</h1>
+            <p>Oups ! La page que vous cherchez n'existe pas.</p>
+            <a class="btn bg-green btn-hover" href="/">Retourner à la page d'accueil</a>
+        </div>
+    </div>
 {% endblock %}

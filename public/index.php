@@ -31,7 +31,7 @@ switch ($action) {
 
     case "article":
         $controller = new ArticlesController();
-        $controller->Article();
+        $controller->article();
         break;
 
     case "createArticle":
@@ -94,6 +94,11 @@ switch ($action) {
         $controller->deleteCom();
         break;
 
+    case "pageContact":
+        $controller = new ContactController();
+        $controller->pageContact();
+        break;
+
     case "contact":
         $controller = new ContactController();
         $controller->contact();
@@ -136,4 +141,3 @@ switch ($action) {
         break;
 
 }
-

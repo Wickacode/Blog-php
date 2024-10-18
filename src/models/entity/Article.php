@@ -2,9 +2,11 @@
 namespace Models\Entity;
 
 use DateTime;
+use Utils\StringConverter;
 
 class Article
-{
+{ 
+    use StringConverter;
     private int $id_article;
     private string $title;
     private string $chapo;
@@ -20,7 +22,7 @@ class Article
     public function __construct(array $data)
     {
         foreach ($data as $key => $value) {
-            $method = "set" . ucfirst($key);
+            $method = "set" . ucfirst($this->camelise($key));
             if (method_exists($this, $method)) {
                 $this->$method($value);
             }
@@ -28,7 +30,7 @@ class Article
     }
 
     //Getter
-    public function getId_article(): int
+    public function getIdArticle(): int
     {
         return $this->id_article;
     }
@@ -44,11 +46,11 @@ class Article
     {
         return $this->content;
     }
-    public function getDate_publication(): DateTime
+    public function getDatePublication(): DateTime
     {
         return $this->date_publication;
     }
-    public function getDate_modification(): DateTime
+    public function getDateModification(): DateTime
     {
         return $this->date_modification;
     }
@@ -70,7 +72,7 @@ class Article
 
     //Setter
     //Assigne la valeur à l'attribut
-    public function setId_article(int $id): void
+    public function setIdArticle(int $id): void
     {
         $this->id_article = $id;
     }
@@ -90,12 +92,12 @@ class Article
         $this->content = $content;
     }
 
-    public function setDate_publication(string $date_publication): void
+    public function setDatePublication(string $date_publication): void
     {
         $this->date_publication = DateTime::createFromFormat('Y-m-d', $date_publication);
     }
 
-    public function setDate_modification(string $date_modification): void
+    public function setDateModification(string $date_modification): void
     {
         $this->date_modification = DateTime::createFromFormat('Y-m-d', $date_modification);
     }
@@ -112,5 +114,4 @@ class Article
     {
         $this->delete_article = $delete_article;
     }
-
 }

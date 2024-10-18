@@ -7,7 +7,6 @@ class Admin
     {
         if (!$this->isAdmin()) {
             header('Location:index.php?action=login');
-            exit;
         }
     }
 
